@@ -11,18 +11,18 @@
 
 ①実装機能をissuesに記載。
 
-②ブランチを作成
+②ブランチを作成（ブランチ名：issues/#(issue number)）
 
-②ブランチを切る
+③ブランチを切る
 ```
 git checkout issues/#(issues nember)
 ```
 
-③実装
+④実装
 
-④PR(PullRequest)
+⑤PR(PullRequest)
 
-⑤Merge
+⑥Merge
 →マージ後はissuesをcloseする。
 
 ---
@@ -44,3 +44,6 @@ git checkout issues/#(issues nember)
 
 ---
 ## commit
+---
+## branch
+
