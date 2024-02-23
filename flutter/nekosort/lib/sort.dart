@@ -8,7 +8,7 @@ class SortPage extends StatefulWidget {
 }
 
 class _SortPageState extends State<SortPage> {
-  final String apiUrl = "http://127.0.0.1:5000";
+  final String apiUrl = "http://127.0.0.1:5000"; // ローカル環境で動かしたときのurl
   late Future<Map<String, dynamic>> currentMatch;
 
   @override
@@ -16,41 +16,44 @@ class _SortPageState extends State<SortPage> {
     super.initState();
     currentMatch = initAndFetchCats();
   }
+  // 最初にソートするページが呼び出されたときにinit_tournamentをバックに投げる。
   Future<Map<String, dynamic>> initAndFetchCats() async {
     final response = await http.post(Uri.parse(("$apiUrl/init_tournament")));
     if (response.statusCode == 200) {
+      // 読み込み成功
       return json.decode(response.body);
     } else {
+      // 読み込み失敗
       throw Exception('Failed to load cats');
     }
   }
+  // 
   Future<Map<String, dynamic>> getCurrentMatch() async {
     final response = await http.get(Uri.parse("$apiUrl/current_match"));
-    if (response.statusCode == 200) {
-      var data = json.decode(response.body);
-      // Check if the tournament is over and if so, navigate to the results page
-      if (data.containsKey('final_results')) {
+    if (response.statusCode == 200) { 
+      // 読み込み成功
+      var data = json.decode(response.body); //jsonデータを型推論してdataにいれる
+      if (data.containsKey('results')) { // dataにfinal_resultsが存在するか？
         Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(data)));
       }
-      return data;
-    } else {
-      throw Exception('Failed to load current match');
+      return data; //dataにfinal_resultsがない場合、ランク付けはまだ続いているからdataを返す。 
+    } else { 
+      throw Exception('Failed to load current match');//読み込み失敗
     }
   }
 
   Future<void> sendSelectedBreedId(String winner, String loser) async {
     final response = await http.post(
-      Uri.parse("$apiUrl/select_winner"),
+      Uri.parse("$apiUrl/select_winner"), 
       headers: {"Content-Type": "application/json"},
-      body: jsonEncode({'winner': winner, 'loser': loser}),
+      body: jsonEncode({'winner': winner, 'loser': loser}), //与えられた引数の１つ目をwinner, 2つ目を loserとする。
     );
 
-    if (response.statusCode == 200) {
-      // Fetch the next match or the final results
+    if (response.statusCode == 200) { // 読み込み成功
       setState(() {
-        currentMatch = getCurrentMatch();
+        currentMatch = getCurrentMatch(); //次のマッチ
       });
-    } else {
+    } else { //読み込み失敗
       print("Failed to send selection");
     }
   }
@@ -61,13 +64,13 @@ class _SortPageState extends State<SortPage> {
       appBar: AppBar(
         title: const Text('Select One Cat'),
       ),
-      body: FutureBuilder<Map<String, dynamic>>(
+      body: FutureBuilder<Map<String, dynamic>>( 
         future: currentMatch,
         builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+          if (snapshot.connectionState == ConnectionState.waiting) { 
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
-            return Center(child: Text("Error fetching cats"));
+            return const Center(child: Text("Error fetching cats"));
           } else if (snapshot.hasData) {
             final data = snapshot.data!;
             final imageUrl1 = data["image_url_1"];
@@ -75,28 +78,27 @@ class _SortPageState extends State<SortPage> {
             final breedId1 = data["breed_id_1"];
             final breedId2 = data["breed_id_2"];
 
-            return Row(
+            return Row( // 横に並べる
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                GestureDetector(
+                GestureDetector( //ユーザーがimageをクリックしたら実行
                   child: Image.network(imageUrl1, width: 150, height: 150),
                   onTap: () => sendSelectedBreedId(breedId1, breedId2),
                 ),
-                GestureDetector(
+                GestureDetector( //ユーザーがimageをクリックしたら実行
                   child: Image.network(imageUrl2, width: 150, height: 150),
                   onTap: () => sendSelectedBreedId(breedId2, breedId1),
                 ),
               ],
             );
-          }
-          // Fallback for unhandled states
-          return Center(child: Text("Unable to fetch data"));
+          } 
+          return const Center(child: Text("Unable to fetch data"));
         },
       ),
     );
   }
 }
-
+//結果画面(現状同じディレクトリにいれてるが、後で別ファイルに移したい)
 class ResultsPage extends StatelessWidget {
   final Map<String, dynamic> finalResults;
 
@@ -104,13 +106,11 @@ class ResultsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // Implement your results page based on the finalResults data
     return Scaffold(
       appBar: AppBar(
-        title: Text("Tournament Results"),
+        title: const Text("Tournament Results"),
       ),
-      body: Center(
-        // Display your results here
+      body: const Center(
         child: Text("Display the results here"),
       ),
     );
