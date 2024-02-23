@@ -40,7 +40,6 @@ class _MyHomePageState extends State<MyHomePage> {
             OutlinedButton(
               child: const Text('ランキングを付ける'),
               style: OutlinedButton.styleFrom(
-                primary: Colors.black,
                 shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10)),
                 side: const BorderSide(),
@@ -48,7 +47,7 @@ class _MyHomePageState extends State<MyHomePage> {
               onPressed: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => sortPage()),
+                  MaterialPageRoute(builder: (context) => SortPage()),
                 );
               }, //ソート画面に遷移するようにする
             ),
