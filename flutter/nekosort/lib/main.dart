@@ -30,6 +30,8 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+  double opacity_1 = 1.0;
+  double opacity_2 = 1.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -50,74 +52,65 @@ class _MyHomePageState extends State<MyHomePage> {
           // 要素の位置を指定
           mainAxisAlignment: MainAxisAlignment.center, // 中央寄せ（縦）
           children: [
-            // 1つ目の画像ボタン
-            InkWell(
-              //画像をボタンにするときはonTapを使う。
-              //タップ（クリック時の処理）
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => SortPage()),
-                );
-              },
-              //ホバー時の処理
-              onHover: (isHover) {
-                setState(() {
-                  if (isHover) {
-                    opacity = 1.0;
-                    width = double.infinity;
-                  } else {
-                    opacity = INITIAL_OPACITY;
-                    width = widget._iconSize;
-                  }
-                });
-              },
-              child: Container(
-                width: 200,
-                height: 200,
-                child: Stack(
-                  alignment: Alignment.center, // テキストを中央に配置
-                  children: [
-                    Container(
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/cat_hands.jpg"),
-                          fit: BoxFit.cover,
-                        ),
+            MouseRegion(
+              onEnter: (_) => setState(() => opacity_1 = 0.8),
+              onExit: (_) => setState(() => opacity_1 = 1.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => SortPage()),
+                  );
+                },
+                child: Opacity(
+                  opacity: opacity_1,
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/cat_hands.jpg"),
+                        fit: BoxFit.cover,
                       ),
                     ),
-                    Align(
-                      alignment: Alignment(0, 0.6), // 右下に近い位置に配置
-                      child:Text(
-                        "Cat\nRanking", // ここに表示したいテキストを入力
+                    child: Align(
+                      alignment: Alignment(0, 0.6),
+                      child: Text(
+                        "Cat\nRanking",
                         textAlign: TextAlign.center,
                         style: TextStyle(
-                          color: Colors.black, // テキストの色を白に設定
-                          fontSize: 28, // フォントサイズを設定
+                          color: Colors.black,
+                          fontSize: 28,
                         ),
                       ),
                     ),
-                  ],
+                  ),
                 ),
               ),
             ),
-            // 2つ目の画像ボタン（例として、別の画像を使用）
-            InkWell(
-              onTap: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => CatImagePage()),
-                );
-              },
-              child: Container(
-                width: 200,
-                height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/cat_hands.jpg"), // 別の画像ファイルのパスを指定
-                    fit: BoxFit.cover,
+            MouseRegion(
+              onEnter: (_) => setState(() => opacity_2 = 0.8),
+              onExit: (_) => setState(() => opacity_2 = 1.0),
+              child: InkWell(
+                onTap: () {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (context) => CatImagePage()),
+                  );
+                },
+                child: Opacity(
+                  opacity: opacity_2,
+                  child: Container(
+                    width: 200,
+                    height: 200,
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      image: DecorationImage(
+                        image: AssetImage("assets/images/cat_hands.jpg"),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
                   ),
                 ),
               ),
