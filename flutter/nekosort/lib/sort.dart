@@ -166,19 +166,51 @@ class ResultsPage extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        automaticallyImplyLeading: false,
         title: const Text("Tournament Results"),
       ),
-      body: ListView.builder(
-        itemCount: cats.length,
-        itemBuilder: (context, index) {
-          var cat = cats[index];
-          return ListTile(
-            leading: Image.network(cat['image_url'], width: 100, height: 100),
-            title: Text(cat['name']), 
-          );
-        },
+      body: Column(
+        children: [
+          Expanded(
+            child: ListView.builder(
+              itemCount: cats.length,
+              itemBuilder: (context, index) {
+                var cat = cats[index];
+                return ListTile(
+                  leading:
+                      Image.network(cat['image_url'], width: 100, height: 100),
+                  title: Text(cat['name']),
+                );
+              },
+            ),
+          ),
+          OutlinedButton(
+              child: const Text('もう一度'),
+              style: OutlinedButton.styleFrom(
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(10)),
+                side: const BorderSide(),
+              ),
+              onPressed: () {
+                Navigator.push(
+                  context, 
+                  MaterialPageRoute(builder: (context) => SortPage()),
+                );
+              }),
+          OutlinedButton(
+            child: const Text('タイトルに戻る'),
+            style: OutlinedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              side: const BorderSide(),
+            ),
+            onPressed: () {
+              // 最初の画面まで戻る
+              Navigator.popUntil(context, (route) => route.isFirst);
+            },
+          ),
+        ],
       ),
     );
   }
 }
-
