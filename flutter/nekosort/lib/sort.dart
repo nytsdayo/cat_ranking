@@ -22,6 +22,8 @@ class _SortPageState extends State<SortPage> {
     final response = await http.post(Uri.parse(("$apiUrl/init_tournament")));
     if (response.statusCode == 200) {
       // 読み込み成功
+      print("response.body");
+      print(response.body);
       return json.decode(response.body);
     } else {
       // 読み込み失敗
@@ -43,13 +45,37 @@ class _SortPageState extends State<SortPage> {
         //final_results?
         // dataにresultsが存在するか？
         print('show results');
-        Navigator.push(context, MaterialPageRoute(builder: (context) => ResultsPage(data)));
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ResultsPage(data)));
       }
       return data; //dataにfinal_resultsがない場合、ランク付けはまだ続いているからdataを返す。
-      
     } else {
       print('getCurrentMatch not statusCode 200');
       throw Exception('Failed to load current match'); //読み込み失敗
+    }
+  }
+
+  Future<void> getFinalResults() async {
+    final url = Uri.parse('$apiUrl/final_result');
+    final response = await http.get(url);
+
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      print("final result data:");
+      print(data);
+      if (data.containsKey('cat')) {
+        final cats = data['cat'];
+        print('Final Results: $cats');
+        //final_results?
+        // dataにresultsが存在するか？
+        print('show results');
+        Navigator.push(context,
+            MaterialPageRoute(builder: (context) => ResultsPage(data)));
+      } else {
+        print('Key "cat" not found in response');
+      }
+    } else {
+      print('Failed to load final results');
     }
   }
 
@@ -65,12 +91,21 @@ class _SortPageState extends State<SortPage> {
 
     if (response.statusCode == 200) {
       // 読み込み成功
-      setState(() {
-        print("next match");
-        currentMatch = getCurrentMatch(); //次のマッチ
-      });
+      var responseData = json.decode(response.body);
+      print("responseData");
+      print(responseData);
+      if (responseData.containsKey('final_result_is_ready')) {
+        // トーナメントが終了した場合、結果を取得する
+        getFinalResults();
+      } else {
+        // トーナメントがまだ終了していない場合、次のマッチをロードする
+        setState(() {
+          print("next match");
+          currentMatch = getCurrentMatch(); //次のマッチ
+        });
+      }
     } else {
-      //読み込み失敗
+      // 読み込み失敗
       print("Failed to send selection");
     }
   }
@@ -127,13 +162,23 @@ class ResultsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    List<dynamic> cats = finalResults['cat'];
+
     return Scaffold(
       appBar: AppBar(
         title: const Text("Tournament Results"),
       ),
-      body: const Center(
-        child: Text("Display the results here"),
+      body: ListView.builder(
+        itemCount: cats.length,
+        itemBuilder: (context, index) {
+          var cat = cats[index];
+          return ListTile(
+            leading: Image.network(cat['image_url'], width: 100, height: 100),
+            title: Text(cat['name']), 
+          );
+        },
       ),
     );
   }
 }
+

@@ -14,6 +14,7 @@ tournament = {
     'next_round': [],
     'results': []
 }
+
 # 取得した猫のidリストを基にトーナメントの状態を初期化し、最初のペアを返す
 @app.route('/init_tournament', methods=['POST'])
 def init_tournament():
@@ -44,15 +45,20 @@ def current_match(flag=False): #flag == False ならマッチ継続
                             'breed_id_2': tournament['current_matches'][0][1]['breed_id'], 'image_url_2': tournament['current_matches'][0][1]['image_url']})
         else:
             return jsonify({'error': 'No current match available'}), 404
-    elif flag == True:
-        print("return final_results")
-        # トーナメントが終了したら、その結果を降順に出力
-        tournament['results'].append(tournament['next_round'][0])
-        tournament['results'].reverse()
-        final_results = {'cat': [tournament['results'][0], tournament['results'][1],
-                                 tournament['results'][2], tournament['results'][3]]}
-        print(final_results)
-        return jsonify(final_results)
+    else:
+        return jsonify({'final_result_is_ready': True})
+        
+# final_resultsを返す　
+@app.route('/final_result', methods=['GET'])
+def return_result():
+    print("return final_results")
+    # トーナメントが終了したら、その結果を降順に出力
+    tournament['results'].append(tournament['next_round'][0])
+    tournament['results'].reverse()
+    final_results = {'cat': [tournament['results'][0], tournament['results'][1],
+                             tournament['results'][2], tournament['results'][3]]}
+    print(final_results)
+    return jsonify(final_results)
         
 # ペアの勝敗を取得し、次のマッチのペアを返す。次のマッチが無ければ、トーナメントの結果を返す。
 @app.route('/select_winner', methods=['POST'])
