@@ -1,10 +1,8 @@
 from flask import Flask, request, jsonify
-import json
-
+import json 
 app = Flask(__name__)
 
 cat_list_file_name = 'cat_breeds_data.json'
-
 # 猫の画像と品種のリストを取得    
 with open(cat_list_file_name, 'r') as file:
     cats_list = json.load(file)
@@ -16,7 +14,6 @@ tournament = {
     'next_round': [],
     'results': []
 }
-
 # 取得した猫のidリストを基にトーナメントの状態を初期化し、最初のペアを返す
 @app.route('/init_tournament', methods=['POST'])
 def init_tournament():
@@ -35,18 +32,28 @@ def init_tournament():
     tournament['results'] = []
 
     # 最初のペアを返す
-    return current_match()
+    return current_match(False)
 
 # 現在のマッチを返す
 @app.route('/current_match', methods=['GET'])
-def current_match():
-    if tournament['current_matches']:
-        print (tournament['current_matches'][0][0]['breed_id'])
-        return jsonify({'breed_id_1': tournament['current_matches'][0][0]['breed_id'], 'image_url_1': tournament['current_matches'][0][0]['image_url'],
-                        'breed_id_2': tournament['current_matches'][0][1]['breed_id'], 'image_url_2': tournament['current_matches'][0][1]['image_url']})
-    else:
-        return jsonify({'error': 'No current match available'}), 404
-
+def current_match(flag=False): #flag == False ならマッチ継続 
+    if flag == False:
+        if tournament['current_matches']:
+            print ("left", tournament['current_matches'][0][0]['breed_id'], "right", tournament['current_matches'][0][1]['breed_id'])
+            return jsonify({'breed_id_1': tournament['current_matches'][0][0]['breed_id'], 'image_url_1': tournament['current_matches'][0][0]['image_url'],
+                            'breed_id_2': tournament['current_matches'][0][1]['breed_id'], 'image_url_2': tournament['current_matches'][0][1]['image_url']})
+        else:
+            return jsonify({'error': 'No current match available'}), 404
+    elif flag == True:
+        print("return final_results")
+        # トーナメントが終了したら、その結果を降順に出力
+        tournament['results'].append(tournament['next_round'][0])
+        tournament['results'].reverse()
+        final_results = {'cat': [tournament['results'][0], tournament['results'][1],
+                                 tournament['results'][2], tournament['results'][3]]}
+        print(final_results)
+        return jsonify(final_results)
+        
 # ペアの勝敗を取得し、次のマッチのペアを返す。次のマッチが無ければ、トーナメントの結果を返す。
 @app.route('/select_winner', methods=['POST'])
 def select_winner():
@@ -66,10 +73,13 @@ def select_winner():
     
     # 次のマッチがある場合、それを返す
     if tournament['current_matches']:
-        return current_match()
+        print("round is not end")
+        return current_match(False)
     else:
+        print("round is end.")
         # 現在のラウンドが終了したら、次のラウンドを現在のラウンドに更新し、次のマッチを返す
         if len(tournament['next_round']) > 1:
+            print("next round")
             if len(tournament['next_round']) % 2 == 1:
                 tournament['current_matches'] = [(tournament['next_round'][i], tournament['next_round'][i+1]) for i in range(0, len(tournament['next_round'])-1, 2)]    
                 seed_cat = tournament['next_round'][len(tournament['next_round'])-1]
@@ -77,15 +87,9 @@ def select_winner():
             else:
                 tournament['current_matches'] = [(tournament['next_round'][i], tournament['next_round'][i+1]) for i in range(0, len(tournament['next_round']), 2)]    
                 tournament['next_round'] = []
-            return current_match()
+            return current_match(False)
         else:
-            # トーナメントが終了したら、その結果を降順に出力
-            tournament['results'].append(tournament['next_round'][0])
-            tournament['results'].reverse()
-            final_results = {'cat': [tournament['results'][0], tournament['results'][1],
-                                     tournament['results'][2], tournament['results'][3]]}
+            return current_match(True)
 
-            return jsonify(final_results)
-
-if __name__ == '__main__':
+if __name__ == '__main__': 
     app.run(debug=True)
