@@ -61,12 +61,30 @@ class _MyHomePageState extends State<MyHomePage> {
               child: Container(
                 width: 200,
                 height: 200,
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  image: DecorationImage(
-                    image: AssetImage("assets/images/cat_hands.jpg"),
-                    fit: BoxFit.cover,
-                  ),
+                child: Stack(
+                  alignment: Alignment.center, // テキストを中央に配置
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/cat_hands.jpg"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                    Align(
+                      alignment: Alignment(0, 0.6), // 右下に近い位置に配置
+                      child:Text(
+                        "Cat\nRanking", // ここに表示したいテキストを入力
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          color: Colors.black, // テキストの色を白に設定
+                          fontSize: 28, // フォントサイズを設定
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),
