@@ -52,11 +52,25 @@ class _MyHomePageState extends State<MyHomePage> {
           children: [
             // 1つ目の画像ボタン
             InkWell(
+              //画像をボタンにするときはonTapを使う。
+              //タップ（クリック時の処理）
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SortPage()),
                 );
+              },
+              //ホバー時の処理
+              onHover: (isHover) {
+                setState(() {
+                  if (isHover) {
+                    opacity = 1.0;
+                    width = double.infinity;
+                  } else {
+                    opacity = INITIAL_OPACITY;
+                    width = widget._iconSize;
+                  }
+                });
               },
               child: Container(
                 width: 200,
