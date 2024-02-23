@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nekosort/sort.dart';
+import 'package:nekosort/cat.dart';
 
 void main() {
   runApp(const MyApp());
@@ -44,21 +45,19 @@ class _MyHomePageState extends State<MyHomePage> {
             fit: BoxFit.none,
           ),
         ),
-        // ボタン要素
+        // ボタン要素(sortPageへの遷移)
         child: Column(
           // 要素の位置を指定
           mainAxisAlignment: MainAxisAlignment.center, // 中央寄せ（縦）
           children: [
-            // Inkwellで画像をタップ可能にする
+            // 1つ目の画像ボタン
             InkWell(
-              // 画像タップ時の挙動
               onTap: () {
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => SortPage()),
                 );
               },
-              // コンテナ内の画像を指定
               child: Container(
                 width: 200,
                 height: 200,
@@ -66,6 +65,26 @@ class _MyHomePageState extends State<MyHomePage> {
                   borderRadius: BorderRadius.circular(10),
                   image: DecorationImage(
                     image: AssetImage("assets/images/cat_hands.jpg"),
+                    fit: BoxFit.cover,
+                  ),
+                ),
+              ),
+            ),
+            // 2つ目の画像ボタン（例として、別の画像を使用）
+            InkWell(
+              onTap: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => CatImagePage()),
+                );
+              },
+              child: Container(
+                width: 200,
+                height: 200,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(10),
+                  image: DecorationImage(
+                    image: AssetImage("assets/images/cat_hands.jpg"), // 別の画像ファイルのパスを指定
                     fit: BoxFit.cover,
                   ),
                 ),
