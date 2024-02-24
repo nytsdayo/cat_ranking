@@ -8,6 +8,8 @@ class SortPage extends StatefulWidget {
 }
 
 class _SortPageState extends State<SortPage> {
+  double opacity_1 = 1.0;
+  double opacity_2 = 1.0;
   final String apiUrl = "https://cat-ranking.onrender.com"; // デプロイ環境で動かしたときのurl
   // final String apiUrl = "http://localhost:5000"; // ローカル環境で動かしたときのurl
   late Future<Map<String, dynamic>> currentMatch;
@@ -113,6 +115,7 @@ class _SortPageState extends State<SortPage> {
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select One Cat'),
@@ -132,18 +135,29 @@ class _SortPageState extends State<SortPage> {
             final breedId2 = data["breed_id_2"];
 
             return Row(
-              // 横に並べる
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                GestureDetector(
-                  //ユーザーがimageをクリックしたら実行
-                  child: Image.network(imageUrl1, width: 150, height: 150),
-                  onTap: () => sendSelectedBreedId(breedId1, breedId2),
+                MouseRegion(
+                  onEnter: (_) => setState(() => opacity_1 = 0.8),
+                  onExit: (_) => setState(() => opacity_1 = 1.0),
+                  child: GestureDetector(
+                    child: Opacity(
+                      opacity: opacity_1,
+                      child: Image.network(imageUrl1, width: 400, height: 400, fit: BoxFit.cover),
+                    ),
+                    onTap: () => sendSelectedBreedId(breedId1, breedId2),
+                  ),
                 ),
-                GestureDetector(
-                  //ユーザーがimageをクリックしたら実行
-                  child: Image.network(imageUrl2, width: 150, height: 150),
-                  onTap: () => sendSelectedBreedId(breedId2, breedId1),
+                MouseRegion(
+                  onEnter: (_) => setState(() => opacity_2 = 0.8),
+                  onExit: (_) => setState(() => opacity_2 = 1.0),
+                  child: GestureDetector(
+                    child: Opacity(
+                      opacity: opacity_2,
+                      child: Image.network(imageUrl2, width: 400, height: 400, fit: BoxFit.cover),
+                    ),
+                    onTap: () => sendSelectedBreedId(breedId2, breedId1),
+                  ),
                 ),
               ],
             );
