@@ -59,6 +59,12 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   double opacity_1 = 1.0;
   double opacity_2 = 1.0;
+  Future<void> _logout() async {
+  await FirebaseAuth.instance.signOut();
+  Navigator.of(context).pushReplacement(
+    MaterialPageRoute(builder: (context) => SignInPage()),
+  );
+}
   @override
   @override
   @override
@@ -84,6 +90,12 @@ class _MyHomePageState extends State<MyHomePage> {
             ],
           ),
         ),
+        actions: [
+          IconButton(
+            icon: Icon(Icons.logout),
+            onPressed: _logout,
+          ),
+        ]
       ),
       body: Stack(
         children: [
