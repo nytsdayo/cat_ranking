@@ -8,7 +8,8 @@ class SortPage extends StatefulWidget {
 }
 
 class _SortPageState extends State<SortPage> {
-  final String apiUrl = "http://127.0.0.1:5000"; // ローカル環境で動かしたときのurl
+  final String apiUrl = "https://cat-ranking.onrender.com"; // デプロイ環境で動かしたときのurl
+  // final String apiUrl = "http://localhost:5000"; // ローカル環境で動かしたときのurl
   late Future<Map<String, dynamic>> currentMatch;
 
   @override
