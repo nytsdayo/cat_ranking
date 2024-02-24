@@ -5,11 +5,13 @@ import firebase_admin
 from firebase_admin import credentials, db
 from datetime import datetime
 import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)
 # 環境変数から秘密鍵の設定を読み込む
-firebase_config_json = os.environ.get('FIREBASE_CONFIG')
+load_dotenv()
+firebase_config_json = os.environ['FIREBASE_CONFIG']
 
 # JSON文字列を辞書オブジェクトに変換
 firebase_config = json.loads(firebase_config_json)
