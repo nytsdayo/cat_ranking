@@ -4,18 +4,21 @@ import json
 import firebase_admin
 from firebase_admin import credentials, db
 from datetime import datetime
-
+import os
 
 app = Flask(__name__)
 CORS(app)
-cred = credentials.Certificate('./flask-project-1f3cb-firebase-adminsdk-j1gb1-d3d3aed793.json')
+# 環境変数から秘密鍵の設定を読み込む
+firebase_config = os.environ.get('FIREBASE_CONFIG')
+
+# Firebase Admin SDKの初期化
+cred = credentials.Certificate(firebase_config)
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://flask-project-1f3cb-default-rtdb.asia-southeast1.firebasedatabase.app/',
     'databaseAuthVariableOverride': {
         'uid': 'my-service-worker'
     }
 })
-
 cat_list_file_name = 'cat_breeds_data.json'
 # 猫の画像と品種のリストを取得    
 with open(cat_list_file_name, 'r') as file:
