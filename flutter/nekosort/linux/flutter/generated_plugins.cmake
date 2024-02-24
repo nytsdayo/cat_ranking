@@ -3,7 +3,7 @@
 #
 
 list(APPEND FLUTTER_PLUGIN_LIST
-  desktop_webview_auth
+  audioplayers_linux
 )
 
 list(APPEND FLUTTER_FFI_PLUGIN_LIST

@@ -114,8 +114,10 @@ class _SortPageState extends State<SortPage> {
   }
 
   @override
-  Widget build(BuildContext context) { 
-  double deviceWidth = MediaQuery.of(context).size.width; 
+  Widget build(BuildContext context) {
+    // デバイスの幅を取得
+  double deviceWidth = MediaQuery.of(context).size.width;
+  // 画像のサイズをデバイスの幅に応じて設定（例：幅の40%）
   double imageSize = deviceWidth * 0.4;
     return Scaffold(
       appBar: AppBar(
