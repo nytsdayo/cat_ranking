@@ -4,18 +4,27 @@ import json
 import firebase_admin
 from firebase_admin import credentials, db
 from datetime import datetime
-
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)
-cred = credentials.Certificate('./flask-project-1f3cb-firebase-adminsdk-j1gb1-d3d3aed793.json')
+# 環境変数から秘密鍵の設定を読み込む
+load_dotenv()
+firebase_config_json = os.environ['FIREBASE_CONFIG']
+
+# JSON文字列を辞書オブジェクトに変換
+firebase_config = json.loads(firebase_config_json)
+
+
+# Firebase Admin SDKの初期化
+cred = credentials.Certificate(firebase_config)
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://flask-project-1f3cb-default-rtdb.asia-southeast1.firebasedatabase.app/',
     'databaseAuthVariableOverride': {
         'uid': 'my-service-worker'
     }
 })
-
 cat_list_file_name = 'cat_breeds_data.json'
 # 猫の画像と品種のリストを取得    
 with open(cat_list_file_name, 'r') as file:
@@ -76,7 +85,7 @@ def return_result():
                              tournament['results'][2], tournament['results'][3]]}
     print(final_results)
     # レーティングを更新
-    # update_rating()
+    update_rating()
     return jsonify(final_results)
         
 # ペアの勝敗を取得し、次のマッチのペアを返す。次のマッチが無ければ、トーナメントの結果を返す。
@@ -126,9 +135,17 @@ def log_match(winner, loser):
         'loser_breed_id': loser,
         'timestamp': match_timestamp
     })
+    print("Match logged successfully")
+    print(match_logs)
     return jsonify({'message': 'Match logged successfully'}), 200
 
-@app.route('/update_rating', methods=['POST'])
+@app.route('/show_rating', methods=['POST'])
+def show_rating():
+    cats_ref = db.reference('/cats')
+    cats = cats_ref.get()
+    sorted_cats = sorted(cats.values(), key=lambda x: x['rating'], reverse=True)
+    return jsonify(sorted_cats)
+
 def update_rating():
     global match_logs 
     if not match_logs:
@@ -146,8 +163,7 @@ def update_rating():
         loser_cat['rating'] = new_loser_rating    
     cats_ref.set(cats)
     match_logs.clear() 
-    sorted_cats = sorted(cats.values(), key=lambda x: x['rating'], reverse=True)
-    return jsonify(sorted_cats)
+    return jsonify({'message': 'Rating updated successfully'}), 200
 
 def calc_elo_rating(winner_rating, loser_rating, k=32):
     # 期待勝率を計算
