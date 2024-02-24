@@ -85,6 +85,7 @@ def return_result():
                              tournament['results'][2], tournament['results'][3]]}
     print(final_results)
     # レーティングを更新
+    update_rating()
     return jsonify(final_results)
         
 # ペアの勝敗を取得し、次のマッチのペアを返す。次のマッチが無ければ、トーナメントの結果を返す。
