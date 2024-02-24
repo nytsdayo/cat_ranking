@@ -48,6 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         // ボタン要素(sortPageへの遷移)
+
         child: Column(
           // 要素の位置を指定
           mainAxisAlignment: MainAxisAlignment.center, // 中央寄せ（縦）
@@ -75,7 +76,7 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                     child: Align(
-                      alignment: Alignment(0, 0.6),
+                      alignment: Alignment(0, 0.5),
                       child: Text(
                         "Cat\nRanking",
                         textAlign: TextAlign.center,
@@ -112,6 +113,15 @@ class _MyHomePageState extends State<MyHomePage> {
                       ),
                     ),
                   ),
+                ),
+              ),
+            ),
+            Expanded(
+              child: Align(
+                alignment: Alignment.bottomCenter,
+                child: Image.asset(
+                  'assets/images/warking_cat.gif', // GIFファイルのパスを指定
+                  fit: BoxFit.cover,
                 ),
               ),
             ),
