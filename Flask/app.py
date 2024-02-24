@@ -4,18 +4,27 @@ import json
 import firebase_admin
 from firebase_admin import credentials, db
 from datetime import datetime
-
+import os
+from dotenv import load_dotenv
 
 app = Flask(__name__)
 CORS(app)
-cred = credentials.Certificate('./flask-project-1f3cb-firebase-adminsdk-j1gb1-d3d3aed793.json')
+# 環境変数から秘密鍵の設定を読み込む
+load_dotenv()
+firebase_config_json = os.environ['FIREBASE_CONFIG']
+
+# JSON文字列を辞書オブジェクトに変換
+firebase_config = json.loads(firebase_config_json)
+
+
+# Firebase Admin SDKの初期化
+cred = credentials.Certificate(firebase_config)
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://flask-project-1f3cb-default-rtdb.asia-southeast1.firebasedatabase.app/',
     'databaseAuthVariableOverride': {
         'uid': 'my-service-worker'
     }
 })
-
 cat_list_file_name = 'cat_breeds_data.json'
 # 猫の画像と品種のリストを取得    
 with open(cat_list_file_name, 'r') as file:
@@ -76,6 +85,7 @@ def return_result():
                              tournament['results'][2], tournament['results'][3]]}
     print(final_results)
     # レーティングを更新
+    update_rating()
     return jsonify(final_results)
         
 # ペアの勝敗を取得し、次のマッチのペアを返す。次のマッチが無ければ、トーナメントの結果を返す。
