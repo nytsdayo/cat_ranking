@@ -1,0 +1,10 @@
+firebaseConfig = {
+  apiKey: "AIzaSyDAQRm-GaPz4BBCnHrti-A8uu9ZRReNgKE",
+  authDomain: "flask-project-1f3cb.firebaseapp.com",
+  databaseURL: "https://flask-project-1f3cb-default-rtdb.asia-southeast1.firebasedatabase.app",
+  projectId: "flask-project-1f3cb",
+  storageBucket: "flask-project-1f3cb.appspot.com",
+  messagingSenderId: "55381721876",
+  appId: "1:55381721876:web:d4846aed74e494830bb801",
+  measurementId: "G-J3WPWY1GK0"
+};
