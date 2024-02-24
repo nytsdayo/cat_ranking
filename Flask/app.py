@@ -3,7 +3,8 @@ from flask_cors import CORS
 import json 
 import firebase_admin
 from firebase_admin import credentials, db
-import datetime
+from datetime import datetime
+
 
 app = Flask(__name__)
 CORS(app)
