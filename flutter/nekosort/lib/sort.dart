@@ -115,7 +115,10 @@ class _SortPageState extends State<SortPage> {
 
   @override
   Widget build(BuildContext context) {
-    
+    // デバイスの幅を取得
+  double deviceWidth = MediaQuery.of(context).size.width;
+  // 画像のサイズをデバイスの幅に応じて設定（例：幅の40%）
+  double imageSize = deviceWidth * 0.4;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select One Cat'),
@@ -143,7 +146,7 @@ class _SortPageState extends State<SortPage> {
                   child: GestureDetector(
                     child: Opacity(
                       opacity: opacity_1,
-                      child: Image.network(imageUrl1, width: 400, height: 400, fit: BoxFit.cover),
+                      child: Image.network(imageUrl1, width: imageSize, height: imageSize, fit: BoxFit.cover),
                     ),
                     onTap: () => sendSelectedBreedId(breedId1, breedId2),
                   ),
@@ -154,7 +157,7 @@ class _SortPageState extends State<SortPage> {
                   child: GestureDetector(
                     child: Opacity(
                       opacity: opacity_2,
-                      child: Image.network(imageUrl2, width: 400, height: 400, fit: BoxFit.cover),
+                      child: Image.network(imageUrl2, width: imageSize, height: imageSize, fit: BoxFit.cover),
                     ),
                     onTap: () => sendSelectedBreedId(breedId2, breedId1),
                   ),
