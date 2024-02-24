@@ -64,6 +64,7 @@ flutter:
     - assets/images/
     - assets/catrank.json
     - assets/catwhich.json
+    - assets/mp3
   
   fonts:
     - family: Kaisei-Opti
