@@ -1,11 +1,12 @@
 from flask import Flask, request, jsonify
+from flask_cors import CORS
 import json 
 import firebase_admin
 from firebase_admin import credentials, db
 import datetime
 
 app = Flask(__name__)
-
+CORS(app)
 cred = credentials.Certificate('./flask-project-1f3cb-firebase-adminsdk-j1gb1-d3d3aed793.json')
 firebase_admin.initialize_app(cred, {
     'databaseURL': 'https://flask-project-1f3cb-default-rtdb.asia-southeast1.firebasedatabase.app/',
