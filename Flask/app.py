@@ -75,7 +75,8 @@ def return_result():
     final_results = {'cat': [tournament['results'][0], tournament['results'][1],
                              tournament['results'][2], tournament['results'][3]]}
     print(final_results)
-    update_rating()
+    # レーティングを更新
+    # update_rating()
     return jsonify(final_results)
         
 # ペアの勝敗を取得し、次のマッチのペアを返す。次のマッチが無ければ、トーナメントの結果を返す。
