@@ -1,3 +1,4 @@
+
 # cat_ranking
 
 ## 運用マニュアル
@@ -44,6 +45,7 @@ git checkout issues/#(issues nember)
 
 ---
 ## commit
+簡潔に
 ---
 ## branch
-
+こまめに切る！

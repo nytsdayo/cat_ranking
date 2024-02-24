@@ -1,0 +1,8 @@
+{
+	"cat":[
+	{"name":"American Bobtail", "breed_id": "abob", "image_url":"https://cdn2.thecatapi.com/images/hBXicehMA.jpg"},
+	{"name": "Arabian Mau", "breed_id": "amau", "image_url":"https://cdn2.thecatapi.com/images/k71ULYfRr.jpg"},
+	{"name": "British Longhair", "breed_id": "bslo", "image_url": "https://cdn2.thecatapi.com/images/7isAO4Cav.jpg"},
+	{"name": "British Shorthair","breed_id": "bsho","image_url": "https://cdn2.thecatapi.com/images/s4wQfYoEk.jpg"}
+	]
+}

@@ -1,0 +1,82 @@
+[
+    {
+        "name": "Abyssinian",
+        "breed_id": "abys",
+        "image_url": "https://cdn2.thecatapi.com/images/0XYvRd7oD.jpg"
+    },
+    {
+        "name": "Aegean",
+        "breed_id": "aege",
+        "image_url": "https://cdn2.thecatapi.com/images/ozEvzdVM-.jpg"
+    },
+    {
+        "name": "American Bobtail",
+        "breed_id": "abob",
+        "image_url": "https://cdn2.thecatapi.com/images/hBXicehMA.jpg"
+    },
+    {
+        "name": "American Curl",
+        "breed_id": "acur",
+        "image_url": "https://cdn2.thecatapi.com/images/xnsqonbjW.jpg"
+    },
+    {
+        "name": "American Shorthair",
+        "breed_id": "asho",
+        "image_url": "https://cdn2.thecatapi.com/images/JFPROfGtQ.jpg"
+    },
+    {
+        "name": "American Wirehair",
+        "breed_id": "awir",
+        "image_url": "https://cdn2.thecatapi.com/images/8D--jCd21.jpg"
+    },
+    {
+        "name": "Arabian Mau",
+        "breed_id": "amau",
+        "image_url": "https://cdn2.thecatapi.com/images/k71ULYfRr.jpg"
+    },
+    {
+        "name": "Australian Mist",
+        "breed_id": "amis",
+        "image_url": "https://cdn2.thecatapi.com/images/_6x-3TiCA.jpg"
+    },
+    {
+        "name": "Balinese",
+        "breed_id": "bali",
+        "image_url": "https://cdn2.thecatapi.com/images/13MkvUreZ.jpg"
+    },
+    {
+        "name": "Bengal",
+        "breed_id": "beng",
+        "image_url": "https://cdn2.thecatapi.com/images/O3btzLlsO.png"
+    },
+    {
+        "name": "Birman",
+        "breed_id": "birm",
+        "image_url": "https://cdn2.thecatapi.com/images/HOrX5gwLS.jpg"
+    },
+    {
+        "name": "Bombay",
+        "breed_id": "bomb",
+        "image_url": "https://cdn2.thecatapi.com/images/5iYq9NmT1.jpg"
+    },
+    {
+        "name": "British Longhair",
+        "breed_id": "bslo",
+        "image_url": "https://cdn2.thecatapi.com/images/7isAO4Cav.jpg"
+    },
+    {
+        "name": "British Shorthair",
+        "breed_id": "bsho",
+        "image_url": "https://cdn2.thecatapi.com/images/s4wQfYoEk.jpg"
+    },
+    {
+        "name": "Burmese",
+        "breed_id": "bure",
+        "image_url": "https://cdn2.thecatapi.com/images/4lXnnfxac.jpg"
+    },
+    {
+        "name": "Burmilla",
+        "breed_id": "buri",
+        "image_url": "https://cdn2.thecatapi.com/images/jvg3XfEdC.jpg"
+    }
+]
