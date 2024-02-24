@@ -1,12 +1,24 @@
 from flask import Flask, request, jsonify
 import json 
+import firebase_admin
+from firebase_admin import credentials, db
+import datetime
+
 app = Flask(__name__)
+
+cred = credentials.Certificate('./flask-project-1f3cb-firebase-adminsdk-j1gb1-d3d3aed793.json')
+firebase_admin.initialize_app(cred, {
+    'databaseURL': 'https://flask-project-1f3cb-default-rtdb.asia-southeast1.firebasedatabase.app/',
+    'databaseAuthVariableOverride': {
+        'uid': 'my-service-worker'
+    }
+})
 
 cat_list_file_name = 'cat_breeds_data.json'
 # 猫の画像と品種のリストを取得    
 with open(cat_list_file_name, 'r') as file:
     cats_list = json.load(file)
-    
+
 # トーナメントの状態を格納
 tournament = {
     'cats': [],
@@ -15,7 +27,10 @@ tournament = {
     'results': []
 }
 
-# 取得した猫のidリストを基にトーナメントの状態を初期化し、最初のペアを返す
+# マッチのログを初期化
+match_logs = []
+
+# 取得した猫のリストを基にトーナメントの状態を初期化し、最初のペアを返す
 @app.route('/init_tournament', methods=['POST'])
 def init_tournament():
     if not cats_list:
@@ -48,7 +63,7 @@ def current_match(flag=False): #flag == False ならマッチ継続
     else:
         return jsonify({'final_result_is_ready': True})
         
-# final_resultsを返す　
+# final_resultsを返す
 @app.route('/final_result', methods=['GET'])
 def return_result():
     print("return final_results")
@@ -58,6 +73,7 @@ def return_result():
     final_results = {'cat': [tournament['results'][0], tournament['results'][1],
                              tournament['results'][2], tournament['results'][3]]}
     print(final_results)
+    update_rating()
     return jsonify(final_results)
         
 # ペアの勝敗を取得し、次のマッチのペアを返す。次のマッチが無ければ、トーナメントの結果を返す。
@@ -73,6 +89,9 @@ def select_winner():
     # 勝者を次のラウンドに保存し、敗者をresultsに保存
     tournament['next_round'].append(winner_cat)
     tournament['results'].append(loser_cat)
+    
+    # 勝敗を記録
+    log_match(winner, loser)
     
     # 現在のマッチを消去
     tournament['current_matches'].pop(0)
@@ -96,6 +115,46 @@ def select_winner():
             return current_match(False)
         else:
             return current_match(True)
+
+def log_match(winner, loser):
+    match_timestamp = datetime.now().isoformat()
+    match_logs.append({
+        'winner_breed_id': winner,
+        'loser_breed_id': loser,
+        'timestamp': match_timestamp
+    })
+    return jsonify({'message': 'Match logged successfully'}), 200
+
+@app.route('/update_rating', methods=['POST'])
+def update_rating():
+    global match_logs 
+    if not match_logs:
+        return jsonify({'message': 'No match logs to process'}), 200
+    
+    cats_ref = db.reference('/cats')
+    cats = cats_ref.get()
+    for match in match_logs:
+        winner_id = match['winner_breed_id']
+        loser_id = match['loser_breed_id']
+        winner_cat = next((cat for cat in cats if cat['breed_id'] == winner_id), None)
+        loser_cat = next((cat for cat in cats if cat['breed_id'] == loser_id), None)
+        new_winner_rating, new_loser_rating = calc_elo_rating(winner_cat['rating'], loser_cat['rating'])
+        winner_cat['rating'] = new_winner_rating
+        loser_cat['rating'] = new_loser_rating    
+    cats_ref.set(cats)
+    match_logs.clear() 
+    sorted_cats = sorted(cats.values(), key=lambda x: x['rating'], reverse=True)
+    return jsonify(sorted_cats)
+
+def calc_elo_rating(winner_rating, loser_rating, k=32):
+    # 期待勝率を計算
+    expected_win_rate = 1 / (1 + 10 ** ((loser_rating - winner_rating) / 400))
+
+    # 新しいレーティングを計算
+    new_winner_rating = winner_rating + k * (1 - expected_win_rate)
+    new_loser_rating = loser_rating + k * (0 - (1 - expected_win_rate))
+
+    return new_winner_rating, new_loser_rating
 
 if __name__ == '__main__': 
     app.run(debug=True)
