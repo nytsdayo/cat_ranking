@@ -134,8 +134,8 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Opacity(
                       opacity: opacity_1,
                       child: Container(
-                        width: 200,
-                        height: 200,
+                        width: 175,
+                        height: 175,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
