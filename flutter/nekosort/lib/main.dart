@@ -4,7 +4,9 @@ import 'package:nekosort/sort.dart';
 import 'package:nekosort/cat.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
+import 'dart:convert';
 import 'Login.dart';
+import 'package:http/http.dart' as http;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +14,62 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
+}
+
+class CatRankingPage extends StatefulWidget {
+  @override
+  _CatRankingPageState createState() => _CatRankingPageState();
+}
+
+class _CatRankingPageState extends State<CatRankingPage> {
+  List<dynamic> _cats = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCatRankings();
+  }
+
+  final String apiUrl = "https://cat-ranking.onrender.com"; // デプロイ環境で動かしたときのurl
+
+  Future<void> _fetchCatRankings() async {
+    final response = await http.post(
+      Uri.parse('$apiUrl/show_rating'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _cats = json.decode(response.body);
+      });
+    } else {
+      throw Exception('Failed to load cat rankings');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Cat Rankings'),
+      ),
+      body: _cats.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: _cats.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Image.network(_cats[index]['image_url'],
+                      width: 50, height: 50),
+                  title: Text(_cats[index]['name']),
+                  subtitle: Text('Rating: ${_cats[index]['rating']}'),
+                );
+              },
+            ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -179,6 +237,42 @@ class _MyHomePageState extends State<MyHomePage> {
                         alignment: Alignment(0, 0.5),
                         child: Text(
                           "ランダムな\n猫に出会う",
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 16,
+                            fontFamily: 'Kaisei-Opti',
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
+                MouseRegion(
+                  onEnter: (_) => setState(() => opacity_2 = 0.8),
+                  onExit: (_) => setState(() => opacity_2 = 1.0),
+                  child: InkWell(
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => CatRankingPage()),
+                      );
+                    },
+                    child: Container(
+                      width: 250,
+                      height: 250,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        image: DecorationImage(
+                          image: AssetImage("assets/images/cat_hands.jpg"),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment(0, 0.5),
+                        child: Text(
+                          "World Nyanking",
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             color: Colors.black,

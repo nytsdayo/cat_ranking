@@ -124,28 +124,19 @@ class _SortPageState extends State<SortPage> {
       appBar: AppBar(
         title: const Text('Select One Cat'),
       ),
-      body: Container(
-        width: double.infinity, // 幅を画面全体に広げる
-        height: double.infinity, // 高さを画面全体に広げる
-        decoration: BoxDecoration(
-          image: DecorationImage(
-            image: AssetImage("assets/images/sort_background.jpg"), // 背景画像のパスを指定
-            fit: BoxFit.cover, // 画像を画面いっぱいに広げる
-          ),
-        ),
-        child: FutureBuilder<Map<String, dynamic>>(
-          future: currentMatch,
-          builder: (context, snapshot) {
-            if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Center(child: CircularProgressIndicator());
-            } else if (snapshot.hasError) {
-              return const Center(child: Text("Error fetching cats"));
-            } else if (snapshot.hasData) {
-              final data = snapshot.data!;
-              final imageUrl1 = data["image_url_1"];
-              final imageUrl2 = data["image_url_2"];
-              final breedId1 = data["breed_id_1"];
-              final breedId2 = data["breed_id_2"];
+      body: FutureBuilder<Map<String, dynamic>>(
+        future: currentMatch,
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return const Center(child: Text("Error fetching cats"));
+          } else if (snapshot.hasData) {
+            final data = snapshot.data!;
+            final imageUrl1 = data["image_url_1"];
+            final imageUrl2 = data["image_url_2"];
+            final breedId1 = data["breed_id_1"];
+            final breedId2 = data["breed_id_2"];
 
             return Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -161,6 +152,7 @@ class _SortPageState extends State<SortPage> {
                           height: imageSize,
                           fit: BoxFit.cover),
                     ),
+                    onTap: () => sendSelectedBreedId(breedId1, breedId2),
                   ),
                 ),
                 MouseRegion(
@@ -174,17 +166,17 @@ class _SortPageState extends State<SortPage> {
                           height: imageSize,
                           fit: BoxFit.cover),
                     ),
+                    onTap: () => sendSelectedBreedId(breedId2, breedId1),
                   ),
-                ],
-              );
-            }
-            return const Center(child: Text("Unable to fetch data"));
-          },
-        ),
+                ),
+              ],
+            );
+          }
+          return const Center(child: Text("Unable to fetch data"));
+        },
       ),
     );
   }
-
 }
 
 //結果画面(現状同じディレクトリにいれてるが、後で別ファイルに移したい)
@@ -197,7 +189,7 @@ class ResultsPage extends StatelessWidget {
   void _shareOnTwitter(String catBreed) async { 
     final encodedCatBreed = Uri.encodeComponent(catBreed);
     final twitterUrl =
-        'https://twitter.com/intent/tweet?text=私の一番好きな猫は$catBreedでした！%0ahttps://cat-ranking-git-account-nyts-projects.vercel.app/%0a君も自分の一番の猫を見つけよう！%0a%23nekomash';
+        'https://twitter.com/intent/tweet?text=私の一番好きな猫は$catBreedでした！%0ahttps://cat-ranking-git-account-nyts-projects.vercel.app/%0a君も一番の猫を見つけよう！%0a%23nekomash';
 
     if (await canLaunchUrl(Uri.parse(twitterUrl))) {
       await launchUrl(Uri.parse(twitterUrl));
