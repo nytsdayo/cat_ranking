@@ -115,61 +115,68 @@ class _SortPageState extends State<SortPage> {
 
   @override
   Widget build(BuildContext context) {
-    // デバイスの幅を取得
-  double deviceWidth = MediaQuery.of(context).size.width;
-  // 画像のサイズをデバイスの幅に応じて設定（例：幅の40%）
-  double imageSize = deviceWidth * 0.4;
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double imageSize = deviceWidth * 0.4;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select One Cat'),
       ),
-      body: FutureBuilder<Map<String, dynamic>>(
-        future: currentMatch,
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return const Center(child: Text("Error fetching cats"));
-          } else if (snapshot.hasData) {
-            final data = snapshot.data!;
-            final imageUrl1 = data["image_url_1"];
-            final imageUrl2 = data["image_url_2"];
-            final breedId1 = data["breed_id_1"];
-            final breedId2 = data["breed_id_2"];
+      body: Container(
+        decoration: BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage("assets/background.jpg"), // 背景画像のパスを指定
+            fit: BoxFit.cover, // 画像を画面いっぱいに広げる
+          ),
+        ),
+        child: FutureBuilder<Map<String, dynamic>>(
+          future: currentMatch,
+          builder: (context, snapshot) {
+            if (snapshot.connectionState == ConnectionState.waiting) {
+              return const Center(child: CircularProgressIndicator());
+            } else if (snapshot.hasError) {
+              return const Center(child: Text("Error fetching cats"));
+            } else if (snapshot.hasData) {
+              final data = snapshot.data!;
+              final imageUrl1 = data["image_url_1"];
+              final imageUrl2 = data["image_url_2"];
+              final breedId1 = data["breed_id_1"];
+              final breedId2 = data["breed_id_2"];
 
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MouseRegion(
-                  onEnter: (_) => setState(() => opacity_1 = 0.8),
-                  onExit: (_) => setState(() => opacity_1 = 1.0),
-                  child: GestureDetector(
-                    child: Opacity(
-                      opacity: opacity_1,
-                      child: Image.network(imageUrl1, width: imageSize, height: imageSize, fit: BoxFit.cover),
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  MouseRegion(
+                    onEnter: (_) => setState(() => opacity_1 = 0.8),
+                    onExit: (_) => setState(() => opacity_1 = 1.0),
+                    child: GestureDetector(
+                      child: Opacity(
+                        opacity: opacity_1,
+                        child: Image.network(imageUrl1, width: imageSize, height: imageSize, fit: BoxFit.cover),
+                      ),
+                      onTap: () => sendSelectedBreedId(breedId1, breedId2),
                     ),
-                    onTap: () => sendSelectedBreedId(breedId1, breedId2),
                   ),
-                ),
-                MouseRegion(
-                  onEnter: (_) => setState(() => opacity_2 = 0.8),
-                  onExit: (_) => setState(() => opacity_2 = 1.0),
-                  child: GestureDetector(
-                    child: Opacity(
-                      opacity: opacity_2,
-                      child: Image.network(imageUrl2, width: imageSize, height: imageSize, fit: BoxFit.cover),
+                  MouseRegion(
+                    onEnter: (_) => setState(() => opacity_2 = 0.8),
+                    onExit: (_) => setState(() => opacity_2 = 1.0),
+                    child: GestureDetector(
+                      child: Opacity(
+                        opacity: opacity_2,
+                        child: Image.network(imageUrl2, width: imageSize, height: imageSize, fit: BoxFit.cover),
+                      ),
+                      onTap: () => sendSelectedBreedId(breedId2, breedId1),
                     ),
-                    onTap: () => sendSelectedBreedId(breedId2, breedId1),
                   ),
-                ),
-              ],
-            );
-          }
-          return const Center(child: Text("Unable to fetch data"));
-        },
+                ],
+              );
+            }
+            return const Center(child: Text("Unable to fetch data"));
+          },
+        ),
       ),
     );
   }
+
 }
 
 //結果画面(現状同じディレクトリにいれてるが、後で別ファイルに移したい)
