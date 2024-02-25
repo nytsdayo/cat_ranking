@@ -80,7 +80,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nekomash',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 201, 194, 194)),
         useMaterial3: true,
       ),
       home: StreamBuilder<User?>(
