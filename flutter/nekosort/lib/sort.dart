@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 class SortPage extends StatefulWidget {
   @override
@@ -114,9 +116,9 @@ class _SortPageState extends State<SortPage> {
   }
 
   @override
-  Widget build(BuildContext context) { 
-  double deviceWidth = MediaQuery.of(context).size.width; 
-  double imageSize = deviceWidth * 0.4;
+  Widget build(BuildContext context) {
+    double deviceWidth = MediaQuery.of(context).size.width;
+    double imageSize = deviceWidth * 0.4;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Select One Cat'),
@@ -144,7 +146,10 @@ class _SortPageState extends State<SortPage> {
                   child: GestureDetector(
                     child: Opacity(
                       opacity: opacity_1,
-                      child: Image.network(imageUrl1, width: imageSize, height: imageSize, fit: BoxFit.cover),
+                      child: Image.network(imageUrl1,
+                          width: imageSize,
+                          height: imageSize,
+                          fit: BoxFit.cover),
                     ),
                     onTap: () => sendSelectedBreedId(breedId1, breedId2),
                   ),
@@ -155,7 +160,10 @@ class _SortPageState extends State<SortPage> {
                   child: GestureDetector(
                     child: Opacity(
                       opacity: opacity_2,
-                      child: Image.network(imageUrl2, width: imageSize, height: imageSize, fit: BoxFit.cover),
+                      child: Image.network(imageUrl2,
+                          width: imageSize,
+                          height: imageSize,
+                          fit: BoxFit.cover),
                     ),
                     onTap: () => sendSelectedBreedId(breedId2, breedId1),
                   ),
@@ -175,6 +183,15 @@ class ResultsPage extends StatelessWidget {
   final Map<String, dynamic> finalResults;
 
   ResultsPage(this.finalResults);
+  void _shareOnTwitter(String catBreed) async {
+    final twitterUrl =
+        'https://twitter.com/intent/tweet?text=私の一番好きな猫は$catBreedでした！ #Nekomash';
+    if (await canLaunchUrlString(twitterUrl)) {
+      await launchUrlString(twitterUrl);
+    } else {
+      throw 'Could not launch $twitterUrl';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -201,6 +218,19 @@ class ResultsPage extends StatelessWidget {
             ),
           ),
           OutlinedButton(
+            child: const Text('Twitterで結果を共有する'),
+            style: OutlinedButton.styleFrom(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10)),
+              side: const BorderSide(),
+            ),
+            onPressed: () {
+              // ここで、選択された猫の種類の名前を渡す必要があります
+              _shareOnTwitter(
+                  cats[0]['name']); // selectedCatBreedNameは選ばれた猫の種類の名前の変数
+            },
+          ),
+          OutlinedButton(
               child: const Text('もう一度'),
               style: OutlinedButton.styleFrom(
                 shape: RoundedRectangleBorder(
@@ -209,7 +239,7 @@ class ResultsPage extends StatelessWidget {
               ),
               onPressed: () {
                 Navigator.push(
-                  context, 
+                  context,
                   MaterialPageRoute(builder: (context) => SortPage()),
                 );
               }),

@@ -1,0 +1,450 @@
+[
+    {
+        "name": "Abyssinian",
+        "breed_id": "abys",
+        "image_url": "https://cdn2.thecatapi.com/images/itfFA4NWS.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%93%E3%82%B7%E3%83%8B%E3%82%A2%E3%83%B3",
+        "language": "ja"
+    },
+    {
+        "name": "Aegean",
+        "breed_id": "aege",
+        "image_url": "https://cdn2.thecatapi.com/images/Hb2N6tYTJ.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Aegean_cat",
+        "language": "en"
+    },
+    {
+        "name": "American Bobtail",
+        "breed_id": "abob",
+        "image_url": "https://cdn2.thecatapi.com/images/gVrhv_yAY.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%83%B3%E3%83%9C%E3%83%96%E3%83%86%E3%82%A4%E3%83%AB",
+        "language": "ja"
+    },
+    {
+        "name": "American Curl",
+        "breed_id": "acur",
+        "image_url": "https://cdn2.thecatapi.com/images/ZZmFRKWZZ.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%83%B3%E3%82%AB%E3%83%BC%E3%83%AB",
+        "language": "ja"
+    },
+    {
+        "name": "American Shorthair",
+        "breed_id": "asho",
+        "image_url": "https://cdn2.thecatapi.com/images/SCHe-SekW.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%83%B3%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%83%98%E3%82%A2",
+        "language": "ja"
+    },
+    {
+        "name": "American Wirehair",
+        "breed_id": "awir",
+        "image_url": "https://cdn2.thecatapi.com/images/Q6TDnfM_O.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%A2%E3%83%A1%E3%83%AA%E3%82%AB%E3%83%B3%E3%83%AF%E3%82%A4%E3%83%A4%E3%83%BC%E3%83%98%E3%82%A2",
+        "language": "ja"
+    },
+    {
+        "name": "Australian Mist",
+        "breed_id": "amis",
+        "image_url": "https://cdn2.thecatapi.com/images/7-1CtKMRr.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Australian_Mist",
+        "language": "en"
+    },
+    {
+        "name": "Balinese",
+        "breed_id": "bali",
+        "image_url": "https://cdn2.thecatapi.com/images/obRjvWv-e.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%AA%E3%83%8B%E3%83%BC%E3%82%BA",
+        "language": "ja"
+    },
+    {
+        "name": "Bambino",
+        "breed_id": "bamb",
+        "image_url": "https://cdn2.thecatapi.com/images/jUY0Dt5iB.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Bambino_cat",
+        "language": "en"
+    },
+    {
+        "name": "Bengal",
+        "breed_id": "beng",
+        "image_url": "https://cdn2.thecatapi.com/images/dN6eoeLjY.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%99%E3%83%B3%E3%82%AC%E3%83%AB_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "Birman",
+        "breed_id": "birm",
+        "image_url": "https://cdn2.thecatapi.com/images/ln1Ks7VIu.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%83%9E%E3%83%B3",
+        "language": "ja"
+    },
+    {
+        "name": "Bombay",
+        "breed_id": "bomb",
+        "image_url": "https://cdn2.thecatapi.com/images/5iYq9NmT1.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%9C%E3%83%B3%E3%83%99%E3%82%A4_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "British Longhair",
+        "breed_id": "bslo",
+        "image_url": "https://cdn2.thecatapi.com/images/i-j1kCi3b.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/British_Longhair",
+        "language": "en"
+    },
+    {
+        "name": "British Shorthair",
+        "breed_id": "bsho",
+        "image_url": "https://cdn2.thecatapi.com/images/v104en-YP.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%96%E3%83%AA%E3%83%86%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%82%B7%E3%83%A7%E3%83%BC%E3%83%88%E3%83%98%E3%82%A2",
+        "language": "ja"
+    },
+    {
+        "name": "Burmese",
+        "breed_id": "bure",
+        "image_url": "https://cdn2.thecatapi.com/images/4lXnnfxac.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%90%E3%83%BC%E3%83%9F%E3%83%BC%E3%82%BA",
+        "language": "ja"
+    },
+    {
+        "name": "Burmilla",
+        "breed_id": "buri",
+        "image_url": "https://cdn2.thecatapi.com/images/wgoLPWPZQ.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Burmilla",
+        "language": "en"
+    },
+    {
+        "name": "California Spangled",
+        "breed_id": "cspa",
+        "image_url": "https://cdn2.thecatapi.com/images/B1ERTmgph.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/California_Spangled",
+        "language": "en"
+    },
+    {
+        "name": "Chantilly-Tiffany",
+        "breed_id": "ctif",
+        "image_url": "https://cdn2.thecatapi.com/images/TR-5nAd_S.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Chantilly-Tiffany",
+        "language": "en"
+    },
+    {
+        "name": "Chartreux",
+        "breed_id": "char",
+        "image_url": "https://cdn2.thecatapi.com/images/iY76694gN.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%A3%E3%83%AB%E3%83%88%E3%83%AA%E3%83%A5%E3%83%BC",
+        "language": "ja"
+    },
+    {
+        "name": "Chausie",
+        "breed_id": "chau",
+        "image_url": "https://cdn2.thecatapi.com/images/vJ3lEYgXr.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Chausie",
+        "language": "en"
+    },
+    {
+        "name": "Cheetoh",
+        "breed_id": "chee",
+        "image_url": "https://cdn2.thecatapi.com/images/LX9uvE3dl.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%99%E3%83%B3%E3%82%AC%E3%83%AB_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "Colorpoint Shorthair",
+        "breed_id": "csho",
+        "image_url": "https://cdn2.thecatapi.com/images/BDMOZo668.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Colorpoint_Shorthair",
+        "language": "en"
+    },
+    {
+        "name": "Cornish Rex",
+        "breed_id": "crex",
+        "image_url": "https://cdn2.thecatapi.com/images/RIRLq-8sp.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%BC%E3%83%8B%E3%83%83%E3%82%B7%E3%83%A5%E3%83%AC%E3%83%83%E3%82%AF%E3%82%B9",
+        "language": "ja"
+    },
+    {
+        "name": "Cymric",
+        "breed_id": "cymr",
+        "image_url": "https://cdn2.thecatapi.com/images/GQ61BDToD.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%AD%E3%83%A0%E3%83%AA%E3%83%83%E3%82%AF_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "Cyprus",
+        "breed_id": "cypr",
+        "image_url": "https://cdn2.thecatapi.com/images/S97Qj5YYO.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Cyprus_cat",
+        "language": "en"
+    },
+    {
+        "name": "Devon Rex",
+        "breed_id": "drex",
+        "image_url": "https://cdn2.thecatapi.com/images/jnqO9lwG2.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%87%E3%83%9C%E3%83%B3%E3%83%AC%E3%83%83%E3%82%AF%E3%82%B9",
+        "language": "ja"
+    },
+    {
+        "name": "Donskoy",
+        "breed_id": "dons",
+        "image_url": "https://cdn2.thecatapi.com/images/3KG57GfMW.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%89%E3%83%B3%E3%82%B9%E3%82%B3%E3%82%A4",
+        "language": "ja"
+    },
+    {
+        "name": "Dragon Li",
+        "breed_id": "lihu",
+        "image_url": "https://cdn2.thecatapi.com/images/DUxU01IY5.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Dragon_Li",
+        "language": "en"
+    },
+    {
+        "name": "Egyptian Mau",
+        "breed_id": "emau",
+        "image_url": "https://cdn2.thecatapi.com/images/AH61b9ziS.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%A8%E3%82%B8%E3%83%97%E3%82%B7%E3%83%A3%E3%83%B3%E3%83%9E%E3%82%A6",
+        "language": "ja"
+    },
+    {
+        "name": "Exotic Shorthair",
+        "breed_id": "esho",
+        "image_url": "https://cdn2.thecatapi.com/images/7Q76qhEAF.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Exotic_Shorthair",
+        "language": "en"
+    },
+    {
+        "name": "Havana Brown",
+        "breed_id": "hbro",
+        "image_url": "https://cdn2.thecatapi.com/images/eJUcA5Wt-.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Havana_Brown",
+        "language": "en"
+    },
+    {
+        "name": "Himalayan",
+        "breed_id": "hima",
+        "image_url": "https://cdn2.thecatapi.com/images/lZOJKmkxY.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%92%E3%83%9E%E3%83%A9%E3%83%A4%E3%83%B3",
+        "language": "ja"
+    },
+    {
+        "name": "Japanese Bobtail",
+        "breed_id": "jbob",
+        "image_url": "https://cdn2.thecatapi.com/images/86jwAC0vv.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%91%E3%83%8B%E3%83%BC%E3%82%BA%E3%83%9C%E3%83%96%E3%83%86%E3%82%A4%E3%83%AB",
+        "language": "ja"
+    },
+    {
+        "name": "Javanese",
+        "breed_id": "java",
+        "image_url": "https://cdn2.thecatapi.com/images/g6SI_ZZRh.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B8%E3%83%A3%E3%83%90%E3%83%8B%E3%83%BC%E3%82%BA",
+        "language": "ja"
+    },
+    {
+        "name": "Khao Manee",
+        "breed_id": "khao",
+        "image_url": "https://cdn2.thecatapi.com/images/165ok6ESN.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Khao_Manee",
+        "language": "en"
+    },
+    {
+        "name": "Korat",
+        "breed_id": "kora",
+        "image_url": "https://cdn2.thecatapi.com/images/OfIuuOv07.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B3%E3%83%A9%E3%83%83%E3%83%88",
+        "language": "ja"
+    },
+    {
+        "name": "Kurilian",
+        "breed_id": "kuri",
+        "image_url": "https://cdn2.thecatapi.com/images/NZpO4pU56M.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%AF%E3%83%AA%E3%83%AB%E3%82%A2%E3%82%A4%E3%83%A9%E3%83%B3%E3%83%89%E3%83%9C%E3%83%96%E3%83%86%E3%82%A4%E3%83%AB",
+        "language": "ja"
+    },
+    {
+        "name": "LaPerm",
+        "breed_id": "lape",
+        "image_url": "https://cdn2.thecatapi.com/images/iapoHxQxL.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%A9%E3%83%91%E3%83%BC%E3%83%9E",
+        "language": "ja"
+    },
+    {
+        "name": "Maine Coon",
+        "breed_id": "mcoo",
+        "image_url": "https://cdn2.thecatapi.com/images/O-57OLhn7.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%A1%E3%82%A4%E3%83%B3%E3%82%AF%E3%83%BC%E3%83%B3",
+        "language": "ja"
+    },
+    {
+        "name": "Manx",
+        "breed_id": "manx",
+        "image_url": "https://cdn2.thecatapi.com/images/OXMyfVPcP.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%B3%E3%82%AF%E3%82%B9",
+        "language": "ja"
+    },
+    {
+        "name": "Munchkin",
+        "breed_id": "munc",
+        "image_url": "https://cdn2.thecatapi.com/images/vXiNSY60T.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%9E%E3%83%B3%E3%83%81%E3%82%AB%E3%83%B3",
+        "language": "ja"
+    },
+    {
+        "name": "Nebelung",
+        "breed_id": "nebe",
+        "image_url": "https://cdn2.thecatapi.com/images/qtgE7qRvw.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Nebelung",
+        "language": "en"
+    },
+    {
+        "name": "Norwegian Forest Cat",
+        "breed_id": "norw",
+        "image_url": "https://cdn2.thecatapi.com/images/ZUumV9qmY.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%8E%E3%83%AB%E3%82%A6%E3%82%A7%E3%83%BC%E3%82%B8%E3%83%A3%E3%83%B3%E3%83%95%E3%82%A9%E3%83%AC%E3%82%B9%E3%83%88%E3%82%AD%E3%83%A3%E3%83%83%E3%83%88",
+        "language": "ja"
+    },
+    {
+        "name": "Ocicat",
+        "breed_id": "ocic",
+        "image_url": "https://cdn2.thecatapi.com/images/NZ_C9Edot.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%AA%E3%82%B7%E3%82%AD%E3%83%A3%E3%83%83%E3%83%88",
+        "language": "ja"
+    },
+    {
+        "name": "Oriental",
+        "breed_id": "orie",
+        "image_url": "https://cdn2.thecatapi.com/images/CQGI7O47l.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Oriental_Shorthair",
+        "language": "en"
+    },
+    {
+        "name": "Persian",
+        "breed_id": "pers",
+        "image_url": "https://cdn2.thecatapi.com/images/-Zfz5z2jK.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%9A%E3%83%AB%E3%82%B7%E3%83%A3_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "Pixie-bob",
+        "breed_id": "pixi",
+        "image_url": "https://cdn2.thecatapi.com/images/b4paC3RGM.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%94%E3%82%AF%E3%82%B7%E3%83%BC%E3%83%9C%E3%83%96",
+        "language": "ja"
+    },
+    {
+        "name": "Ragamuffin",
+        "breed_id": "raga",
+        "image_url": "https://cdn2.thecatapi.com/images/SMuZx-bFM.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%A9%E3%82%AC%E3%83%9E%E3%83%95%E3%82%A3%E3%83%B3_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "Ragdoll",
+        "breed_id": "ragd",
+        "image_url": "https://cdn2.thecatapi.com/images/y0wAin0Ei.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%A9%E3%82%B0%E3%83%89%E3%83%BC%E3%83%AB",
+        "language": "ja"
+    },
+    {
+        "name": "Russian Blue",
+        "breed_id": "rblu",
+        "image_url": "https://cdn2.thecatapi.com/images/ErPMMvcv2.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%AD%E3%82%B7%E3%82%A2%E3%83%B3%E3%83%96%E3%83%AB%E3%83%BC",
+        "language": "ja"
+    },
+    {
+        "name": "Savannah",
+        "breed_id": "sava",
+        "image_url": "https://cdn2.thecatapi.com/images/IOjBCPLXA.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Savannah_cat",
+        "language": "en"
+    },
+    {
+        "name": "Scottish Fold",
+        "breed_id": "sfol",
+        "image_url": "https://cdn2.thecatapi.com/images/Kfq3biw92.png",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%82%B3%E3%83%86%E3%82%A3%E3%83%83%E3%82%B7%E3%83%A5%E3%83%95%E3%82%A9%E3%83%BC%E3%83%AB%E3%83%89",
+        "language": "ja"
+    },
+    {
+        "name": "Selkirk Rex",
+        "breed_id": "srex",
+        "image_url": "https://cdn2.thecatapi.com/images/enV_ZqSpp.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%BB%E3%83%AB%E3%82%AB%E3%83%BC%E3%82%AF%E3%83%AC%E3%83%83%E3%82%AF%E3%82%B9",
+        "language": "ja"
+    },
+    {
+        "name": "Siamese",
+        "breed_id": "siam",
+        "image_url": "https://cdn2.thecatapi.com/images/e0sS4bZcP.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%A3%E3%83%A0_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "Siberian",
+        "breed_id": "sibe",
+        "image_url": "https://cdn2.thecatapi.com/images/mcHWg83Yj.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B5%E3%82%A4%E3%83%99%E3%83%AA%E3%82%A2%E3%83%B3",
+        "language": "ja"
+    },
+    {
+        "name": "Singapura",
+        "breed_id": "sing",
+        "image_url": "https://cdn2.thecatapi.com/images/JBkP_EJm9.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B7%E3%83%B3%E3%82%AC%E3%83%97%E3%83%BC%E3%83%A9",
+        "language": "ja"
+    },
+    {
+        "name": "Snowshoe",
+        "breed_id": "snow",
+        "image_url": "https://cdn2.thecatapi.com/images/bs1vvq8XG.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Snowshoe_(cat)",
+        "language": "en"
+    },
+    {
+        "name": "Somali",
+        "breed_id": "soma",
+        "image_url": "https://cdn2.thecatapi.com/images/BjTEe8vY2.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%BD%E3%83%9E%E3%83%AA_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "Sphynx",
+        "breed_id": "sphy",
+        "image_url": "https://cdn2.thecatapi.com/images/c9sGDkRoi.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%B9%E3%83%95%E3%82%A3%E3%83%B3%E3%82%AF%E3%82%B9_(%E3%83%8D%E3%82%B3)",
+        "language": "ja"
+    },
+    {
+        "name": "Tonkinese",
+        "breed_id": "tonk",
+        "image_url": "https://cdn2.thecatapi.com/images/mudzVExq0.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%83%88%E3%83%B3%E3%82%AD%E3%83%8B%E3%83%BC%E3%82%BA",
+        "language": "ja"
+    },
+    {
+        "name": "Toyger",
+        "breed_id": "toyg",
+        "image_url": "https://cdn2.thecatapi.com/images/-LIBXM5Jt.png",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/Toyger",
+        "language": "en"
+    },
+    {
+        "name": "Turkish Angora",
+        "breed_id": "tang",
+        "image_url": "https://cdn2.thecatapi.com/images/41Fe8q9vU.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%83%BC%E3%82%AD%E3%83%83%E3%82%B7%E3%83%A5%E3%82%A2%E3%83%B3%E3%82%B4%E3%83%A9",
+        "language": "ja"
+    },
+    {
+        "name": "Turkish Van",
+        "breed_id": "tvan",
+        "image_url": "https://cdn2.thecatapi.com/images/Ycnj9T-JJ.jpg",
+        "wikipedia_url": "https://ja.wikipedia.org/wiki/%E3%82%BF%E3%83%BC%E3%82%AD%E3%83%83%E3%82%B7%E3%83%A5%E3%83%90%E3%83%B3",
+        "language": "ja"
+    },
+    {
+        "name": "York Chocolate",
+        "breed_id": "ycho",
+        "image_url": "https://cdn2.thecatapi.com/images/0SxW2SQ_S.jpg",
+        "wikipedia_url": "https://en.wikipedia.org/wiki/York_Chocolate",
+        "language": "en"
+    }
+]
