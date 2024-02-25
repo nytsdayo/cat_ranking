@@ -139,7 +139,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: AssetImage("assets/images/cat_hands.jpg"),
+                            image: AssetImage("assets/images/walking_blackcat.jpg"),
                             fit: BoxFit.cover,
                           ),
                         ),
