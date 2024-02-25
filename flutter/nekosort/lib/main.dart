@@ -80,29 +80,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nekomash',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 201, 194, 194)),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 201, 194, 194)),
         useMaterial3: true,
       ),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          //ログイン判定
-          if (snapshot.connectionState == ConnectionState.active) {
-            User? user = snapshot.data;
-            if (user == null) {
-              return SignInPage(); // ユーザーが未ログインの場合、サインインページを表示
-            }
-            return const MyHomePage(
-                title: 'Nekomash'); // ユーザーがログイン済みの場合、メインページへ
-          }
-          return const Scaffold(
-            // コネクションの状態がactiveではない場合、ローディングインジケーターを表示
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        },
-      ),
+      home: const MyHomePage(title: 'Nekomash'), // Directly go to MyHomePage
     );
   }
 }
@@ -250,42 +232,6 @@ class _MyHomePageState extends State<MyHomePage> {
                               fontSize: 16,
                               fontFamily: 'Kaisei-Opti',
                             ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
-                MouseRegion(
-                  onEnter: (_) => setState(() => opacity_2 = 0.8),
-                  onExit: (_) => setState(() => opacity_2 = 1.0),
-                  child: InkWell(
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => CatRankingPage()),
-                      );
-                    },
-                    child: Container(
-                      width: 250,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/cat_hands.jpg"),
-                          fit: BoxFit.cover,
-                        ),
-                      ),
-                      child: Align(
-                        alignment: Alignment(0, 0.5),
-                        child: Text(
-                          "World Nyanking",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Kaisei-Opti',
                           ),
                         ),
                       ),
