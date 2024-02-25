@@ -122,6 +122,8 @@ class _SortPageState extends State<SortPage> {
         title: const Text('Select One Cat'),
       ),
       body: Container(
+        width: double.infinity, // 幅を画面全体に広げる
+        height: double.infinity, // 高さを画面全体に広げる
         decoration: BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/images/sort_background.jpg"), // 背景画像のパスを指定
