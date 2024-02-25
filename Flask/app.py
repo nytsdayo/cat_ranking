@@ -49,13 +49,8 @@ def init_tournament():
     # トーナメントの状態を初期化
     tournament['cats'] = cats_list
     num = len(cats_list)
-    if num % 2 == 1:
-        tournament['current_matches'] = [(cats_list[i], cats_list[i+1]) for i in range(0, num-1, 2)]
-        seed_cat = tournament['cats'].pop(num-1)
-        tournament['next_round'] = [seed_cat]
-    else:
-        tournament['current_matches'] = [(cats_list[i], cats_list[i+1]) for i in range(0, num, 2)]
-        tournament['next_round'] = []
+    tournament['current_matches'] = [(cats_list[i], cats_list[i+1]) for i in range(0, num, 2)]
+    tournament['next_round'] = []
     tournament['results'] = []
 
     # 最初のペアを返す
@@ -117,13 +112,8 @@ def select_winner():
         # 現在のラウンドが終了したら、次のラウンドを現在のラウンドに更新し、次のマッチを返す
         if len(tournament['next_round']) > 1:
             print("next round")
-            if len(tournament['next_round']) % 2 == 1:
-                tournament['current_matches'] = [(tournament['next_round'][i], tournament['next_round'][i+1]) for i in range(0, len(tournament['next_round'])-1, 2)]    
-                seed_cat = tournament['next_round'][len(tournament['next_round'])-1]
-                tournament['next_round'] = [seed_cat]
-            else:
-                tournament['current_matches'] = [(tournament['next_round'][i], tournament['next_round'][i+1]) for i in range(0, len(tournament['next_round']), 2)]    
-                tournament['next_round'] = []
+            tournament['current_matches'] = [(tournament['next_round'][i], tournament['next_round'][i+1]) for i in range(0, len(tournament['next_round']), 2)]    
+            tournament['next_round'] = []
             return current_match(False)
         else:
             return current_match(True)
@@ -139,7 +129,7 @@ def log_match(winner, loser):
     print(match_logs)
     return jsonify({'message': 'Match logged successfully'}), 200
 
-@app.route('/show_rating', methods=['POST'])
+@app.route('/show_rating', methods=['GET'])
 def show_rating():
     cats_ref = db.reference('/cats')
     cats = cats_ref.get()

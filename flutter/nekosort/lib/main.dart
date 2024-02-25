@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nekomash',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: const Color.fromARGB(255, 218, 213, 227)),
+        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 255, 255)),
         useMaterial3: true,
       ),
       home: StreamBuilder<User?>(
@@ -213,3 +213,8 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+/*
+選択している時は
+
+*/

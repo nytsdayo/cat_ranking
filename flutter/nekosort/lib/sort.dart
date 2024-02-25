@@ -199,7 +199,7 @@ class ResultsPage extends StatelessWidget {
   void _shareOnTwitter(String catBreed) async {
     final encodedCatBreed = Uri.encodeComponent(catBreed);
     final twitterUrl =
-        'https://twitter.com/intent/tweet?text=私の一番好きな猫は$catBreedでした！%0ahttps://cat-ranking-git-account-nyts-projects.vercel.app/%0a君も自分の一番の猫を見つけよう！%0a%23nekomash';
+        'https://twitter.com/intent/tweet?text=私の推し猫は$catBreedです！%0ahttps://cat-ranking-git-account-nyts-projects.vercel.app/%0a君も自分の推し猫を見つけよう！%0a%23nekomash';
 
     if (await canLaunchUrl(Uri.parse(twitterUrl))) {
       await launchUrl(Uri.parse(twitterUrl));
@@ -252,7 +252,7 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(cat['image_url']),
                         backgroundColor:
-                            Color(0xFFFFAB91), // Light brown variant
+                            Color.fromARGB(255, 248, 118, 114), // Light brown variant
                       ),
                       title: Text(
                         cat['name'],
@@ -260,7 +260,7 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
                             TextStyle(color: Color(0xFF5D4037)), // Dark brown
                       ),
                       trailing: Icon(Icons.favorite,
-                          color: Color(0xFFD7CCC8)), // Light grey
+                          color: Color.fromARGB(255, 244, 239, 237)), // Light grey
                       onTap: () => _shareOnTwitter(cat['name']),
                     ),
                   );
