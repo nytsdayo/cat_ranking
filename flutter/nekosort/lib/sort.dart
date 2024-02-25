@@ -170,14 +170,15 @@ class _SortPageState extends State<SortPage> {
                     child: Opacity(
                       opacity: opacity_2,
                       child: Image.network(imageUrl2,
-                          width: imageSize,
-                          height: imageSize,
-                          fit: BoxFit.cover),
+                        width: imageSize,
+                        height: imageSize,
+                        fit: BoxFit.cover),
                     ),
                   ),
-                ],
-              );
-            }
+                ),
+              ],
+        );
+      }
             return const Center(child: Text("Unable to fetch data"));
           },
         ),
