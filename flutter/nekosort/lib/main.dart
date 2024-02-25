@@ -167,7 +167,7 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => SortPage()),
+                        MaterialPageRoute(builder: (context) => CatImagePage()),
                       );
                     },
                     child: Opacity(
@@ -185,7 +185,7 @@ class _MyHomePageState extends State<MyHomePage> {
                         child: Align(
                           alignment: Alignment(0, 0.5),
                           child: Text(
-                            "お気に入りの\n猫を見つける",
+                            "らんだむ\nにゃんこ",
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               color: Colors.black,
