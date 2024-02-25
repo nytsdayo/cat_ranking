@@ -53,7 +53,7 @@ class _CatRankingPageState extends State<CatRankingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Cat Rankings'),
+        title: Text('Cat Rating Ranking'),
       ),
       body: _cats.isEmpty
           ? Center(child: CircularProgressIndicator())
