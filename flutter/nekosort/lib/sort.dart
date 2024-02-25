@@ -4,7 +4,6 @@ import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
-
 class SortPage extends StatefulWidget {
   @override
   _SortPageState createState() => _SortPageState();
@@ -129,7 +128,8 @@ class _SortPageState extends State<SortPage> {
         height: double.infinity, // 高さを画面全体に広げる
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/images/sort_background.jpg"), // 背景画像のパスを指定
+            image:
+                AssetImage("assets/images/sort_background.jpg"), // 背景画像のパスを指定
             fit: BoxFit.cover, // 画像を画面いっぱいに広げる
           ),
         ),
@@ -147,45 +147,46 @@ class _SortPageState extends State<SortPage> {
               final breedId1 = data["breed_id_1"];
               final breedId2 = data["breed_id_2"];
 
-            return Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                MouseRegion(
-                  onEnter: (_) => setState(() => opacity_1 = 0.8),
-                  onExit: (_) => setState(() => opacity_1 = 1.0),
-                  child: GestureDetector(
-                    child: Opacity(
-                      opacity: opacity_1,
-                      child: Image.network(imageUrl1,
-                          width: imageSize,
-                          height: imageSize,
-                          fit: BoxFit.cover),
+              return Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  MouseRegion(
+                    onEnter: (_) => setState(() => opacity_1 = 0.8),
+                    onExit: (_) => setState(() => opacity_1 = 1.0),
+                    child: GestureDetector(
+                      child: Opacity(
+                        opacity: opacity_1,
+                        child: Image.network(imageUrl1,
+                            width: imageSize,
+                            height: imageSize,
+                            fit: BoxFit.cover),
+                      ),
+                      onTap: () => sendSelectedBreedId(breedId1, breedId2),
                     ),
                   ),
-                ),
-                MouseRegion(
-                  onEnter: (_) => setState(() => opacity_2 = 0.8),
-                  onExit: (_) => setState(() => opacity_2 = 1.0),
-                  child: GestureDetector(
-                    child: Opacity(
-                      opacity: opacity_2,
-                      child: Image.network(imageUrl2,
-                        width: imageSize,
-                        height: imageSize,
-                        fit: BoxFit.cover),
+                  MouseRegion(
+                    onEnter: (_) => setState(() => opacity_2 = 0.8),
+                    onExit: (_) => setState(() => opacity_2 = 1.0),
+                    child: GestureDetector(
+                      child: Opacity(
+                        opacity: opacity_2,
+                        child: Image.network(imageUrl2,
+                            width: imageSize,
+                            height: imageSize,
+                            fit: BoxFit.cover),
+                      ),
+                      onTap: () => sendSelectedBreedId(breedId2, breedId1),
                     ),
                   ),
-                ),
-              ],
-        );
-      }
+                ],
+              );
+            }
             return const Center(child: Text("Unable to fetch data"));
           },
         ),
       ),
     );
   }
-
 }
 
 //結果画面(現状同じディレクトリにいれてるが、後で別ファイルに移したい)
@@ -195,7 +196,7 @@ class ResultsPage extends StatelessWidget {
 
   ResultsPage(this.finalResults);
 
-  void _shareOnTwitter(String catBreed) async { 
+  void _shareOnTwitter(String catBreed) async {
     final encodedCatBreed = Uri.encodeComponent(catBreed);
     final twitterUrl =
         'https://twitter.com/intent/tweet?text=私の一番好きな猫は$catBreedでした！%0ahttps://cat-ranking-git-account-nyts-projects.vercel.app/%0a君も自分の一番の猫を見つけよう！%0a%23nekomash';
@@ -220,7 +221,8 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: Text("Tournament Results", style: TextStyle(color: Colors.white)),
+        title:
+            Text("Tournament Results", style: TextStyle(color: Colors.white)),
         backgroundColor: Color(0xFFA1887F), // Light brown
       ),
       body: Container(
@@ -249,13 +251,16 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
                     child: ListTile(
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(cat['image_url']),
-                        backgroundColor: Color(0xFFFFAB91), // Light brown variant
+                        backgroundColor:
+                            Color(0xFFFFAB91), // Light brown variant
                       ),
                       title: Text(
                         cat['name'],
-                        style: TextStyle(color: Color(0xFF5D4037)), // Dark brown
+                        style:
+                            TextStyle(color: Color(0xFF5D4037)), // Dark brown
                       ),
-                      trailing: Icon(Icons.favorite, color: Color(0xFFD7CCC8)), // Light grey
+                      trailing: Icon(Icons.favorite,
+                          color: Color(0xFFD7CCC8)), // Light grey
                       onTap: () => _shareOnTwitter(cat['name']),
                     ),
                   );
@@ -272,7 +277,7 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
                     label: Text('Share on Twitter'),
                     onPressed: () => _shareOnTwitter(cats[0]['name']),
                     style: ElevatedButton.styleFrom(
-                     backgroundColor : Color(0xFF795548), // Brown
+                      backgroundColor: Color(0xFF795548), // Brown
                     ),
                   ),
                   OutlinedButton(
@@ -290,7 +295,8 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
                   ),
                   OutlinedButton(
                     child: Text('Back to Title'),
-                    onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
+                    onPressed: () =>
+                        Navigator.popUntil(context, (route) => route.isFirst),
                     style: OutlinedButton.styleFrom(
                       backgroundColor: Color(0xFF5D4037), // Dark brown
                       side: BorderSide(color: Color(0xFF795548)), // Brown
