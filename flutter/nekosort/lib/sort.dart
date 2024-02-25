@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:url_launcher/url_launcher.dart';
+import 'package:url_launcher/url_launcher_string.dart';
+
 
 class SortPage extends StatefulWidget {
   @override
@@ -11,7 +14,7 @@ class _SortPageState extends State<SortPage> {
   double opacity_1 = 1.0;
   double opacity_2 = 1.0;
   final String apiUrl = "https://cat-ranking.onrender.com"; // デプロイ環境で動かしたときのurl
-  // final String apiUrl = "http://localhost:5000"; // ローカル環境で動かしたときのurl
+  //final String apiUrl = "http://localhost:5000"; // ローカル環境で動かしたときのurl
   late Future<Map<String, dynamic>> currentMatch;
 
   @override
@@ -37,17 +40,17 @@ class _SortPageState extends State<SortPage> {
   //
   Future<Map<String, dynamic>> getCurrentMatch() async {
     final response = await http.get(Uri.parse("$apiUrl/current_match"));
-    print('called getCurrentmatch');
-    print(response.statusCode);
+    //print('called getCurrentmatch');
+    //print(response.statusCode);
     if (response.statusCode == 200) {
       // 読み込み成功
       var data = json.decode(response.body); //jsonデータを型推論してdataにいれる
       print(data);
-      print('Does data contains string type key?');
+      //print('Does data contains string type key?');
       if (data.containsKey('cat')) {
         //final_results?
         // dataにresultsが存在するか？
-        print('show results');
+        //print('show results');
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => ResultsPage(data)));
       }
@@ -64,14 +67,14 @@ class _SortPageState extends State<SortPage> {
 
     if (response.statusCode == 200) {
       final Map<String, dynamic> data = json.decode(response.body);
-      print("final result data:");
-      print(data);
+      //print("final result data:");
+      //print(data);
       if (data.containsKey('cat')) {
         final cats = data['cat'];
         print('Final Results: $cats');
         //final_results?
         // dataにresultsが存在するか？
-        print('show results');
+        //print('show results');
         Navigator.push(context,
             MaterialPageRoute(builder: (context) => ResultsPage(data)));
       } else {
@@ -144,29 +147,32 @@ class _SortPageState extends State<SortPage> {
               final breedId1 = data["breed_id_1"];
               final breedId2 = data["breed_id_2"];
 
-              return Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  MouseRegion(
-                    onEnter: (_) => setState(() => opacity_1 = 0.8),
-                    onExit: (_) => setState(() => opacity_1 = 1.0),
-                    child: GestureDetector(
-                      child: Opacity(
-                        opacity: opacity_1,
-                        child: Image.network(imageUrl1, width: imageSize, height: imageSize, fit: BoxFit.cover),
-                      ),
-                      onTap: () => sendSelectedBreedId(breedId1, breedId2),
+            return Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                MouseRegion(
+                  onEnter: (_) => setState(() => opacity_1 = 0.8),
+                  onExit: (_) => setState(() => opacity_1 = 1.0),
+                  child: GestureDetector(
+                    child: Opacity(
+                      opacity: opacity_1,
+                      child: Image.network(imageUrl1,
+                          width: imageSize,
+                          height: imageSize,
+                          fit: BoxFit.cover),
                     ),
                   ),
-                  MouseRegion(
-                    onEnter: (_) => setState(() => opacity_2 = 0.8),
-                    onExit: (_) => setState(() => opacity_2 = 1.0),
-                    child: GestureDetector(
-                      child: Opacity(
-                        opacity: opacity_2,
-                        child: Image.network(imageUrl2, width: imageSize, height: imageSize, fit: BoxFit.cover),
-                      ),
-                      onTap: () => sendSelectedBreedId(breedId2, breedId1),
+                ),
+                MouseRegion(
+                  onEnter: (_) => setState(() => opacity_2 = 0.8),
+                  onExit: (_) => setState(() => opacity_2 = 1.0),
+                  child: GestureDetector(
+                    child: Opacity(
+                      opacity: opacity_2,
+                      child: Image.network(imageUrl2,
+                          width: imageSize,
+                          height: imageSize,
+                          fit: BoxFit.cover),
                     ),
                   ),
                 ],
@@ -184,8 +190,27 @@ class _SortPageState extends State<SortPage> {
 //結果画面(現状同じディレクトリにいれてるが、後で別ファイルに移したい)
 class ResultsPage extends StatelessWidget {
   final Map<String, dynamic> finalResults;
+  final PR = 'https://cat-ranking-git-account-nyts-projects.vercel.app/';
 
   ResultsPage(this.finalResults);
+
+  void _shareOnTwitter(String catBreed) async { 
+    final encodedCatBreed = Uri.encodeComponent(catBreed);
+    final twitterUrl =
+        'https://twitter.com/intent/tweet?text=私の一番好きな猫は$catBreedでした！%0ahttps://cat-ranking-git-account-nyts-projects.vercel.app/%0a君も自分の一番の猫を見つけよう！%0a%23nekomash';
+
+    if (await canLaunchUrl(Uri.parse(twitterUrl))) {
+      await launchUrl(Uri.parse(twitterUrl));
+    } else {
+      throw 'Could not launch $twitterUrl';
+    }
+  }
+/*
+私の一番好きな猫は$catBreedでした！
+https://cat-ranking-git-account-nyts-projects.vercel.app/
+君も一番の猫を見つけよう!
+#Nekomash #ねこましゅ
+*/
 
   @override
   Widget build(BuildContext context) {
@@ -194,49 +219,87 @@ class ResultsPage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title: const Text("Tournament Results"),
+        title: Text("Tournament Results", style: TextStyle(color: Colors.white)),
+        backgroundColor: Color(0xFFA1887F), // Light brown
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: ListView.builder(
-              itemCount: cats.length,
-              itemBuilder: (context, index) {
-                var cat = cats[index];
-                return ListTile(
-                  leading:
-                      Image.network(cat['image_url'], width: 100, height: 100),
-                  title: Text(cat['name']),
-                );
-              },
-            ),
-          ),
-          OutlinedButton(
-              child: const Text('もう一度'),
-              style: OutlinedButton.styleFrom(
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(10)),
-                side: const BorderSide(),
+      body: Container(
+        decoration: BoxDecoration(
+          color: Color(0xFFFFE0B2), // Very light brown
+        ),
+        child: Column(
+          children: [
+            SizedBox(height: 20),
+            Text(
+              "Your Favorite Cats",
+              style: TextStyle(
+                fontSize: 22,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFF5D4037), // Dark brown
               ),
-              onPressed: () {
-                Navigator.push(
-                  context, 
-                  MaterialPageRoute(builder: (context) => SortPage()),
-                );
-              }),
-          OutlinedButton(
-            child: const Text('タイトルに戻る'),
-            style: OutlinedButton.styleFrom(
-              shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(10)),
-              side: const BorderSide(),
             ),
-            onPressed: () {
-              // 最初の画面まで戻る
-              Navigator.popUntil(context, (route) => route.isFirst);
-            },
-          ),
-        ],
+            Expanded(
+              child: ListView.builder(
+                itemCount: cats.length,
+                itemBuilder: (context, index) {
+                  var cat = cats[index];
+                  return Card(
+                    color: Color(0xFFFFCCBC), // Light brown
+                    margin: EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                    child: ListTile(
+                      leading: CircleAvatar(
+                        backgroundImage: NetworkImage(cat['image_url']),
+                        backgroundColor: Color(0xFFFFAB91), // Light brown variant
+                      ),
+                      title: Text(
+                        cat['name'],
+                        style: TextStyle(color: Color(0xFF5D4037)), // Dark brown
+                      ),
+                      trailing: Icon(Icons.favorite, color: Color(0xFFD7CCC8)), // Light grey
+                      onTap: () => _shareOnTwitter(cat['name']),
+                    ),
+                  );
+                },
+              ),
+            ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 20),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton.icon(
+                    icon: Icon(Icons.share, color: Colors.white),
+                    label: Text('Share on Twitter'),
+                    onPressed: () => _shareOnTwitter(cats[0]['name']),
+                    style: ElevatedButton.styleFrom(
+                     backgroundColor : Color(0xFF795548), // Brown
+                    ),
+                  ),
+                  OutlinedButton(
+                    child: Text('Try Again'),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => SortPage()),
+                      );
+                    },
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Color(0xFF5D4037), // Dark brown
+                      side: BorderSide(color: Color(0xFF795548)), // Brown
+                    ),
+                  ),
+                  OutlinedButton(
+                    child: Text('Back to Title'),
+                    onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
+                    style: OutlinedButton.styleFrom(
+                      backgroundColor: Color(0xFF5D4037), // Dark brown
+                      side: BorderSide(color: Color(0xFF795548)), // Brown
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
