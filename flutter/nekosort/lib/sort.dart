@@ -124,7 +124,7 @@ class _SortPageState extends State<SortPage> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/background.jpg"), // 背景画像のパスを指定
+            image: AssetImage("assets/images/sort_background.jpg"), // 背景画像のパスを指定
             fit: BoxFit.cover, // 画像を画面いっぱいに広げる
           ),
         ),
