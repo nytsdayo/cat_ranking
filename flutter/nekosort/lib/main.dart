@@ -147,12 +147,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 250,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           image: AssetImage("assets/images/cat_hands.jpg"),
                           fit: BoxFit.cover,
                         ),
                       ),
-                      child: Align(
+                      child: const Align(
                         alignment: Alignment(0, 0.5),
                         child: Text(
                           "お気に入りの\n猫を見つける",
@@ -181,12 +181,12 @@ class _MyHomePageState extends State<MyHomePage> {
                       height: 250,
                       decoration: BoxDecoration(
                         borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
+                        image: const DecorationImage(
                           image: AssetImage("assets/images/cat_hands.jpg"),
                           fit: BoxFit.cover,
                         ),
                       ),
-                      child: Align(
+                      child: const Align(
                         alignment: Alignment(0, 0.5),
                         child: Text(
                           "ランダムな\n猫に出会う",
@@ -216,3 +216,11 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
+/*
+次やりたいこと
+・(世界)現在のランキングを実装　World Nyanking
+・Loginを絶対しないといけない状態になっているから、ログインしなくてもできる(ゲストモードの実装)
+・のちのち、ログインユーザー向けに機能を実装することで、
+
+*/
