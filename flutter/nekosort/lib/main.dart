@@ -4,7 +4,9 @@ import 'package:nekosort/sort.dart';
 import 'package:nekosort/cat.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'firebase_options.dart';
+import 'dart:convert';
 import 'Login.dart';
+import 'package:http/http.dart' as http;
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -12,6 +14,62 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   runApp(const MyApp());
+}
+
+class CatRankingPage extends StatefulWidget {
+  @override
+  _CatRankingPageState createState() => _CatRankingPageState();
+}
+
+class _CatRankingPageState extends State<CatRankingPage> {
+  List<dynamic> _cats = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _fetchCatRankings();
+  }
+
+  final String apiUrl = "https://cat-ranking.onrender.com"; // デプロイ環境で動かしたときのurl
+
+  Future<void> _fetchCatRankings() async {
+    final response = await http.post(
+      Uri.parse('$apiUrl/show_rating'),
+      headers: <String, String>{
+        'Content-Type': 'application/json; charset=UTF-8',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      setState(() {
+        _cats = json.decode(response.body);
+      });
+    } else {
+      throw Exception('Failed to load cat rankings');
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Cat Rating Ranking'),
+      ),
+      body: _cats.isEmpty
+          ? Center(child: CircularProgressIndicator())
+          : ListView.builder(
+              itemCount: _cats.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Image.network(_cats[index]['image_url'],
+                      width: 50, height: 50),
+                  title: Text(_cats[index]['name']),
+                  subtitle: Text('Rating: ${_cats[index]['rating']}'),
+                );
+              },
+            ),
+    );
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -22,29 +80,11 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Nekomash',
       theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 255, 255, 255)),
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 201, 194, 194)),
         useMaterial3: true,
       ),
-      home: StreamBuilder<User?>(
-        stream: FirebaseAuth.instance.authStateChanges(),
-        builder: (context, snapshot) {
-          //ログイン判定
-          if (snapshot.connectionState == ConnectionState.active) {
-            User? user = snapshot.data;
-            if (user == null) {
-              return SignInPage(); // ユーザーが未ログインの場合、サインインページを表示
-            }
-            return const MyHomePage(
-                title: 'Nekomash'); // ユーザーがログイン済みの場合、メインページへ
-          }
-          return const Scaffold(
-            // コネクションの状態がactiveではない場合、ローディングインジケーターを表示
-            body: Center(
-              child: CircularProgressIndicator(),
-            ),
-          );
-        },
-      ),
+      home: const MyHomePage(title: 'Nekomash'), // Directly go to MyHomePage
     );
   }
 }
@@ -213,8 +253,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-
-/*
-選択している時は
-
-*/

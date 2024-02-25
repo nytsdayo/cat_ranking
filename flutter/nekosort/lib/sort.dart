@@ -4,6 +4,7 @@ import 'dart:convert';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:url_launcher/url_launcher_string.dart';
 
+
 class SortPage extends StatefulWidget {
   @override
   _SortPageState createState() => _SortPageState();
@@ -114,7 +115,6 @@ class _SortPageState extends State<SortPage> {
       print("Failed to send selection");
     }
   }
-
   @override
   Widget build(BuildContext context) {
     double deviceWidth = MediaQuery.of(context).size.width;
@@ -192,14 +192,14 @@ class _SortPageState extends State<SortPage> {
 //結果画面(現状同じディレクトリにいれてるが、後で別ファイルに移したい)
 class ResultsPage extends StatelessWidget {
   final Map<String, dynamic> finalResults;
-  final PR = 'https://cat-ranking-git-account-nyts-projects.vercel.app/';
+  final PR = 'https://cat-ranking.vercel.app/';
 
   ResultsPage(this.finalResults);
 
-  void _shareOnTwitter(String catBreed) async {
+  void _shareOnTwitter(String catBreed) async { 
     final encodedCatBreed = Uri.encodeComponent(catBreed);
     final twitterUrl =
-        'https://twitter.com/intent/tweet?text=私の推し猫は$catBreedです！%0ahttps://cat-ranking-git-account-nyts-projects.vercel.app/%0a君も自分の推し猫を見つけよう！%0a%23nekomash';
+        'https://twitter.com/intent/tweet?text=私の推し猫は「$catBreed」でした！%0ahttps://cat-ranking.vercel.app/%0a%20みんなも自分の推し猫を探そう！%0a%23nekomash%20%23ねこましゅ%20%23技育キャンプ';
 
     if (await canLaunchUrl(Uri.parse(twitterUrl))) {
       await launchUrl(Uri.parse(twitterUrl));
@@ -213,6 +213,9 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
 君も一番の猫を見つけよう!
 #Nekomash #ねこましゅ
 */
+/*
+*/
+
 
   @override
   Widget build(BuildContext context) {
@@ -221,13 +224,12 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
     return Scaffold(
       appBar: AppBar(
         automaticallyImplyLeading: false,
-        title:
-            Text("Tournament Results", style: TextStyle(color: Colors.white)),
+        title: Text("Tournament Results", style: TextStyle(color: Colors.white)),
         backgroundColor: Color(0xFFA1887F), // Light brown
       ),
       body: Container(
         decoration: BoxDecoration(
-          color: Color(0xFFFFE0B2), // Very light brown
+          color: Color.fromARGB(255, 228, 215, 214), // Very light brown
         ),
         child: Column(
           children: [
@@ -251,16 +253,25 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
                     child: ListTile(
                       leading: CircleAvatar(
                         backgroundImage: NetworkImage(cat['image_url']),
-                        backgroundColor:
-                            Color.fromARGB(255, 248, 118, 114), // Light brown variant
+                        backgroundColor: Color(0xFFFFAB91), // Light brown variant
                       ),
                       title: Text(
                         cat['name'],
-                        style:
-                            TextStyle(color: Color(0xFF5D4037)), // Dark brown
+                        style: TextStyle(color: Color(0xFF5D4037)), // Dark brown
                       ),
-                      trailing: Icon(Icons.favorite,
-                          color: Color.fromARGB(255, 244, 239, 237)), // Light grey
+                      subtitle: InkWell(
+                        child: Text(
+                          'この猫について知りたい！',
+                          style: TextStyle(color: Colors.blue),
+                        ),
+                        onTap: () async {
+                          final url = 'https://en.wikipedia.org/wiki/${Uri.encodeComponent(cat['name'])}';
+                          if (await canLaunchUrlString(url)) {
+                            await launchUrlString(url);
+                          }
+                        },
+                      ),
+                      trailing: Icon(Icons.favorite, color: Color(0xFFD7CCC8)), // Light grey
                       onTap: () => _shareOnTwitter(cat['name']),
                     ),
                   );
@@ -274,14 +285,18 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
                 children: [
                   ElevatedButton.icon(
                     icon: Icon(Icons.share, color: Colors.white),
-                    label: Text('Share on Twitter'),
+                    label: Text(
+                      'Xで結果を共有する',
+                      style: TextStyle(color: Colors.white), // Make the text white
+                    ),
                     onPressed: () => _shareOnTwitter(cats[0]['name']),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFF795548), // Brown
                     ),
                   ),
                   OutlinedButton(
-                    child: Text('Try Again'),
+                    child: Text('もう一度'),
+                    
                     onPressed: () {
                       Navigator.push(
                         context,
@@ -289,15 +304,16 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
                       );
                     },
                     style: OutlinedButton.styleFrom(
+                      foregroundColor: Color.fromARGB(255, 255, 251, 251), // 
                       backgroundColor: Color(0xFF5D4037), // Dark brown
                       side: BorderSide(color: Color(0xFF795548)), // Brown
                     ),
                   ),
                   OutlinedButton(
-                    child: Text('Back to Title'),
-                    onPressed: () =>
-                        Navigator.popUntil(context, (route) => route.isFirst),
+                    child: Text('タイトルに戻る'),
+                    onPressed: () => Navigator.popUntil(context, (route) => route.isFirst),
                     style: OutlinedButton.styleFrom(
+                      foregroundColor: Color.fromARGB(255, 255, 251, 251), // 
                       backgroundColor: Color(0xFF5D4037), // Dark brown
                       side: BorderSide(color: Color(0xFF795548)), // Brown
                     ),
@@ -311,3 +327,8 @@ https://cat-ranking-git-account-nyts-projects.vercel.app/
     );
   }
 }
+
+/*
+wikipediaのリンクを貼る。
+今日のにゃんこ
+*/
