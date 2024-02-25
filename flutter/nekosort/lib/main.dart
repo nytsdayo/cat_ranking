@@ -120,6 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
               mainAxisAlignment:
                   MainAxisAlignment.spaceAround, // Adjust spacing as needed
               children: [
+                // SortPage（１）
                 MouseRegion(
                   onEnter: (_) => setState(() => opacity_1 = 0.8),
                   onExit: (_) => setState(() => opacity_1 = 1.0),
@@ -130,31 +131,35 @@ class _MyHomePageState extends State<MyHomePage> {
                         MaterialPageRoute(builder: (context) => SortPage()),
                       );
                     },
-                    child: Container(
-                      width: 250,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/cat_hands.jpg"),
-                          fit: BoxFit.cover,
+                    child: Opacity(
+                      opacity: opacity_1,
+                      child: Container(
+                        width: 250,
+                        height: 250,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/cat_hands.jpg"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      child: Align(
-                        alignment: Alignment(0, 0.5),
-                        child: Text(
-                          "お気に入りの\n猫を見つける",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Kaisei-Opti',
+                        child: Align(
+                          alignment: Alignment(0, 0.5),
+                          child: Text(
+                            "お気に入りの\n猫を見つける",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontFamily: 'Kaisei-Opti',
+                            ),
                           ),
                         ),
                       ),
                     ),
                   ),
                 ),
+                // random page(2)
                 MouseRegion(
                   onEnter: (_) => setState(() => opacity_2 = 0.8),
                   onExit: (_) => setState(() => opacity_2 = 1.0),
@@ -162,28 +167,31 @@ class _MyHomePageState extends State<MyHomePage> {
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => CatImagePage()),
+                        MaterialPageRoute(builder: (context) => SortPage()),
                       );
                     },
-                    child: Container(
-                      width: 250,
-                      height: 250,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(10),
-                        image: DecorationImage(
-                          image: AssetImage("assets/images/cat_hands.jpg"),
-                          fit: BoxFit.cover,
+                    child: Opacity(
+                      opacity: opacity_2,
+                      child: Container(
+                        width: 250,
+                        height: 250,
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(10),
+                          image: DecorationImage(
+                            image: AssetImage("assets/images/cat_hands.jpg"),
+                            fit: BoxFit.cover,
+                          ),
                         ),
-                      ),
-                      child: Align(
-                        alignment: Alignment(0, 0.5),
-                        child: Text(
-                          "ランダムな\n猫に出会う",
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
-                            fontFamily: 'Kaisei-Opti',
+                        child: Align(
+                          alignment: Alignment(0, 0.5),
+                          child: Text(
+                            "お気に入りの\n猫を見つける",
+                            textAlign: TextAlign.center,
+                            style: TextStyle(
+                              color: Colors.black,
+                              fontSize: 16,
+                              fontFamily: 'Kaisei-Opti',
+                            ),
                           ),
                         ),
                       ),
