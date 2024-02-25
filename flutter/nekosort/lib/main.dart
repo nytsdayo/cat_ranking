@@ -140,7 +140,7 @@ class _MyHomePageState extends State<MyHomePage> {
             child: Text(
               'Nekomash',
               style: TextStyle(
-                fontSize: 80, // Adjust the font size as needed
+                fontSize: 64, // Adjust the font size as needed
                 fontFamily: 'Kaisei-Opti',
                 color: Color.fromARGB(255, 100, 56, 40),
                 fontWeight: FontWeight.bold,
@@ -174,12 +174,12 @@ class _MyHomePageState extends State<MyHomePage> {
                     child: Opacity(
                       opacity: opacity_1,
                       child: Container(
-                        width: 250,
-                        height: 250,
+                        width: 175,
+                        height: 175,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(10),
                           image: DecorationImage(
-                            image: AssetImage("assets/images/cat_hands.jpg"),
+                            image: AssetImage("assets/images/walking_blackcat.jpg"),
                             fit: BoxFit.cover,
                           ),
                         ),
