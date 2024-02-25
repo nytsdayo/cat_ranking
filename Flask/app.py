@@ -129,7 +129,7 @@ def log_match(winner, loser):
     print(match_logs)
     return jsonify({'message': 'Match logged successfully'}), 200
 
-@app.route('/show_rating', methods=['POST'])
+@app.route('/show_rating', methods=['GET'])
 def show_rating():
     cats_ref = db.reference('/cats')
     cats = cats_ref.get()
